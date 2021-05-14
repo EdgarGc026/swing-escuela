@@ -1,5 +1,3 @@
-
-import models.Student;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -47,18 +45,40 @@ class School implements ActionListener {
     JInternalFrame_student.setVisible(false);
     JInternalFrame_student.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
+    JButton btnAcceptStudent = new JButton("Aceptar");
+    btnAcceptStudent.setBounds(100,150,100,30);
+    JButton btnCancelStudent = new JButton("Cancelar");
+    btnCancelStudent.setBounds(100,150,100,30);
+
     JScrollPane scrollPane_student = new JScrollPane();
     JInternalFrame_student.add(scrollPane_student, BorderLayout.CENTER);
+
+    JPanel JPanel_student = new JPanel();
+    JPanel_student.add(btnAcceptStudent);
+    JPanel_student.add(btnCancelStudent);
+    JInternalFrame_student.add(JPanel_student);
     JDesktopPane_myDesktopPane.add(JInternalFrame_student);
+
     /*
-    * Seccion JInternalFrame de los maestros*/
+    * Seccion JInternalFrame de los maestros
+    * */
     JInternalFrame_teacher = new JInternalFrame("Maestros", true, true, true, true);
     JInternalFrame_teacher.setSize(400,300);
     JInternalFrame_teacher.setVisible(false);
     JInternalFrame_teacher.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
+    JButton btnAcceptTeacher = new JButton("Aceptar");
+    btnAcceptTeacher.setBounds(100,150,100,30);
+    JButton btnCancelTeacher = new JButton("Cancelar");
+    btnCancelTeacher.setBounds(100,150,100,30);
+
     JScrollPane scrollPane_teacher = new JScrollPane();
     JInternalFrame_teacher.add(scrollPane_teacher, BorderLayout.CENTER);
+
+    JPanel JPanel_teacher = new JPanel();
+    JPanel_teacher.add(btnAcceptTeacher);
+    JPanel_teacher.add(btnCancelTeacher);
+    JInternalFrame_teacher.add(JPanel_teacher);
     JDesktopPane_myDesktopPane.add(JInternalFrame_teacher);
 
     /*
@@ -69,22 +89,43 @@ class School implements ActionListener {
     JInternalFrame_director.setVisible(false);
     JInternalFrame_director.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
+    JButton btnAcceptDirector = new JButton("Aceptar");
+    btnAcceptTeacher.setBounds(100,150,100,30);
+    JButton btnCancelDirector = new JButton("Cancelar");
+    btnCancelTeacher.setBounds(100,150,100,30);
+
+    JPanel JPanel_director = new JPanel();
+    JPanel_director.add(btnAcceptDirector);
+    JPanel_director.add(btnCancelDirector);
+
     JScrollPane scrollPane_director = new JScrollPane();
-    JInternalFrame_teacher.add(scrollPane_director, BorderLayout.CENTER);
+    JInternalFrame_director.add(scrollPane_director, BorderLayout.CENTER);
+
+    JInternalFrame_director.add(JPanel_director);
     JDesktopPane_myDesktopPane.add(JInternalFrame_director);
 
     /*
      * Seccion de los administradores
      * */
+
     JInternalFrame_administrator = new JInternalFrame("Administradores", true, true, true, true);
     JInternalFrame_administrator.setSize(400,300);
     JInternalFrame_administrator.setVisible(false);
     JInternalFrame_administrator.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-    JScrollPane scrollPane_admin = new JScrollPane();
-    JInternalFrame_teacher.add(scrollPane_admin, BorderLayout.CENTER);
-    JDesktopPane_myDesktopPane.add(JInternalFrame_administrator);
+    JButton btnAcceptAdmin = new JButton("Aceptar");
+    btnAcceptAdmin.setBounds(100,150,100,30);
+    JButton btnCancelAdmin = new JButton("Cancelar");
+    btnCancelAdmin.setBounds(100,150,100,30);
 
+    JPanel JPanel_administrator = new JPanel();
+    JPanel_administrator.add(btnAcceptAdmin);
+    JPanel_administrator.add(btnCancelAdmin);
+
+    JScrollPane scrollPane_admin = new JScrollPane();
+    JInternalFrame_administrator.add(scrollPane_admin, BorderLayout.CENTER);
+    JInternalFrame_administrator.add(JPanel_administrator);
+    JDesktopPane_myDesktopPane.add(JInternalFrame_administrator);
 
     // Mostramos el Frame.
     JFrame_myFrame.setVisible(true);
@@ -158,5 +199,3 @@ class School implements ActionListener {
     });
   }
 }
-
-
