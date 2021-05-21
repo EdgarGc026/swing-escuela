@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyListUserModel  {
-  private static final long serialVersonUID = 40L;
   ArrayList<Student> list = new ArrayList<>();
 
   public MyListUserModel(List<Student> students){

@@ -1,28 +1,44 @@
 package models;
 
 public class Student {
-  private int id;
+  private String studentDNI;
   private String name;
+  private String teacher;
   private String course;
+  private int score;
   private String date;
-  private int teacherId;
-  private int courseId;
 
-  public Student(int id, String name, String course, String date, int teacherId, int courseId) {
-    this.id = id;
-    this.name = name;
-    this.course = course;
+  public String getStudentDNI() {
+    return studentDNI;
+  }
+
+  public void setStudentDNI(String studentDNI) {
+    this.studentDNI = studentDNI;
+  }
+
+  public String getTeacher() {
+    return teacher;
+  }
+
+  public void setTeacher(String teacher) {
+    this.teacher = teacher;
+  }
+
+  public String getDate() {
+    return date;
+  }
+
+  public void setDate(String date) {
     this.date = date;
-    this.teacherId = teacherId;
-    this.courseId = courseId;
   }
 
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
+  public Student(String studentDNI, String name, String teacher, String course, int score, String date) {
+    this.studentDNI = studentDNI;
+    this.name = name;
+    this.teacher = teacher;
+    this.course = course;
+    this.score = score;
+    this.date = date;
   }
 
   public String getName() {
@@ -41,39 +57,14 @@ public class Student {
     this.course = course;
   }
 
-  public String getDate() {
-    return date;
-  }
-
-  public void setDate(String date) {
-    this.date = date;
-  }
-
-  public int getTeacherId() {
-    return teacherId;
-  }
-
-  public void setTeacherId(int teacherId) {
-    this.teacherId = teacherId;
-  }
-
-  public int getCourseId() {
-    return courseId;
-  }
-
-  public void setCourseId(int courseId) {
-    this.courseId = courseId;
-  }
+  public int getScore() { return score; }
+  public void setScore( int score ) { this.score = score; }
 
   @Override
   public String toString() {
     return "Estudiante{" +
-      "id=" + id +
       ", name='" + name + '\'' +
       ", course='" + course + '\'' +
-      ", date='" + date + '\'' +
-      ", teacherId=" + teacherId +
-      ", courseId=" + courseId +
     '}';
   }
 }

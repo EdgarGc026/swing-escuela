@@ -1,22 +1,12 @@
 package models;
 
 public class Admin {
-  private int id;
   private String name;
-  private String email;
+  private String job;
 
-  public Admin(int id, String name, String email) {
-    this.id = id;
+  public Admin(String name, String job) {
     this.name = name;
-    this.email = email;
-  }
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
+    this.job = job;
   }
 
   public String getName() {
@@ -27,11 +17,11 @@ public class Admin {
     this.name = name;
   }
 
-  public String getEmail() {
-    return email;
+  public String getJob() {
+    return job;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+  public void setJob(String job) {
+    this.job = job;
   }
 }

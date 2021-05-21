@@ -45,58 +45,159 @@ class School implements ActionListener {
     JInternalFrame_student.setVisible(false);
     JInternalFrame_student.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-    JButton btnAcceptStudent = new JButton("Aceptar");
-    btnAcceptStudent.setBounds(100,150,100,30);
-    JButton btnCancelStudent = new JButton("Cancelar");
-    btnCancelStudent.setBounds(100,150,100,30);
+    //Agregando los botones
+    JButton btnAddStudent = new JButton("Agregar");
+    btnAddStudent.setBounds(5,30,80,30);
+    JButton btnDeleteStudent = new JButton("Eliminar");
+    btnDeleteStudent.setBounds(5,30,80,30);
+
+    //Agregando un Input y un label
+    JLabel labelName = new JLabel("Nombre");
+    labelName.setBounds(5,5,50,30);
+    JTextField textFieldName = new JTextField(10);
+    textFieldName.setBounds(120, 5, 150,30);
+
+    JLabel labelCourse = new JLabel("Curso");
+    labelCourse.setBounds(5,10,50,30);
+    JTextField textFieldCourse = new JTextField(10);
+    textFieldCourse.setBounds(120, 10, 150,30);
+
+    JLabel labelScore = new JLabel("Calificacion");
+    labelScore.setBounds(5,15,50,30);
+    JTextField textFieldScore = new JTextField(10);
+    textFieldScore.setBounds(120, 15, 150,30);
 
     JScrollPane scrollPane_student = new JScrollPane();
     JInternalFrame_student.add(scrollPane_student, BorderLayout.CENTER);
-
     JPanel JPanel_student = new JPanel();
-    JPanel_student.add(btnAcceptStudent);
-    JPanel_student.add(btnCancelStudent);
+    JPanel_student.add(labelName);
+    JPanel_student.add(textFieldName);
+    JPanel_student.add(labelCourse);
+    JPanel_student.add(textFieldCourse);
+    JPanel_student.add(labelScore);
+    JPanel_student.add(textFieldScore);
+    JPanel_student.add(btnAddStudent);
+    JPanel_student.add(btnDeleteStudent);
     JInternalFrame_student.add(JPanel_student);
     JDesktopPane_myDesktopPane.add(JInternalFrame_student);
 
-    /*
+    /*TODO: Usando el JInternaFrame de los Maestros
     * Seccion JInternalFrame de los maestros
+    * Estudiantes y sus calificaciones
     * */
     JInternalFrame_teacher = new JInternalFrame("Maestros", true, true, true, true);
     JInternalFrame_teacher.setSize(400,300);
     JInternalFrame_teacher.setVisible(false);
     JInternalFrame_teacher.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-    JButton btnAcceptTeacher = new JButton("Aceptar");
-    btnAcceptTeacher.setBounds(100,150,100,30);
-    JButton btnCancelTeacher = new JButton("Cancelar");
-    btnCancelTeacher.setBounds(100,150,100,30);
+    JButton btnAddTeacher = new JButton("Agregar");
+    btnAddTeacher.setBounds(100,150,100,30);
+    JButton btnDeleteTeacher = new JButton("Eliminar");
+    btnDeleteTeacher.setBounds(100,150,100,30);
+
+    JLabel labelNameStudentOnTeacher = new JLabel("Nombre");
+    labelNameStudentOnTeacher.setBounds(5,15,50,30);
+    JTextField textFieldNameStudentOnTeacher = new JTextField(10);
+    textFieldNameStudentOnTeacher.setBounds(120, 15, 150,30);
+
+    JLabel labelCourseStudentOnTeacher = new JLabel("Materia");
+    labelCourseStudentOnTeacher.setBounds(5,15,50,30);
+    JTextField textFieldCourseStudentOnTeacher = new JTextField(10);
+    textFieldCourseStudentOnTeacher.setBounds(120, 15, 150,30);
+
+    JLabel labelScoreStudentOnTeacher = new JLabel("Calificacion");
+    labelScoreStudentOnTeacher.setBounds(5,15,50,30);
+    JTextField textFieldScoreStudentOnTeacher = new JTextField(10);
+    textFieldScoreStudentOnTeacher.setBounds(120, 15, 150,30);
+
+    /**JLabel labelNumberPersonalTeacher = new JLabel("No de personal");
+    labelNumberPersonalTeacher.setBounds(5,15,50,30);
+    JTextField textFieldNumberPersonalTeacher = new JTextField(10);
+    textFieldNumberPersonalTeacher.setBounds(120, 15, 150,30);*/
 
     JScrollPane scrollPane_teacher = new JScrollPane();
     JInternalFrame_teacher.add(scrollPane_teacher, BorderLayout.CENTER);
-
     JPanel JPanel_teacher = new JPanel();
-    JPanel_teacher.add(btnAcceptTeacher);
-    JPanel_teacher.add(btnCancelTeacher);
+    JPanel_teacher.add(labelNameStudentOnTeacher);
+    JPanel_teacher.add(textFieldNameStudentOnTeacher);
+    JPanel_teacher.add(labelCourseStudentOnTeacher);
+    JPanel_teacher.add(textFieldCourseStudentOnTeacher);
+    JPanel_teacher.add(labelScoreStudentOnTeacher);
+    JPanel_teacher.add(textFieldScoreStudentOnTeacher);
+
+    /*JPanel_teacher.add(labelNumberPersonalTeacher);
+    JPanel_teacher.add(textFieldNumberPersonalTeacher); */
+
+    JPanel_teacher.add(btnAddTeacher);
+    JPanel_teacher.add(btnDeleteTeacher);
     JInternalFrame_teacher.add(JPanel_teacher);
     JDesktopPane_myDesktopPane.add(JInternalFrame_teacher);
 
-    /*
+    /*TODO: Estas usando el InternalFrame de los directores
     * Seccion JIntenalFrame de los directores
+    * Operaciones CRUD a los siguientes:
+    * Profesor y Administrador
     * */
     JInternalFrame_director = new JInternalFrame("Directores", true, true, true, true);
-    JInternalFrame_director.setSize(400,300);
+    JInternalFrame_director.setSize(500,400);
     JInternalFrame_director.setVisible(false);
     JInternalFrame_director.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-    JButton btnAcceptDirector = new JButton("Aceptar");
-    btnAcceptTeacher.setBounds(100,150,100,30);
-    JButton btnCancelDirector = new JButton("Cancelar");
-    btnCancelTeacher.setBounds(100,150,100,30);
+    //Agregando los botones
+    JButton btnAddDirector = new JButton("Agregar");
+    btnAddStudent.setBounds(5,30,80,30);
+    JButton btnDeleteDirector = new JButton("Eliminar");
+    btnDeleteStudent.setBounds(5,30,80,30);
+
+    //Agregando los inputs y labels
+    JLabel labelNameProfesorOnDirector = new JLabel("Nombre Profesor");
+    labelNameProfesorOnDirector.setBounds(5,5,50,30);
+    JTextField textFieldNameProfesorOnDirector = new JTextField(10);
+    textFieldNameProfesorOnDirector.setBounds(120, 5, 150,30);
+
+    JLabel labelCourseOnDirector = new JLabel("Curso");
+    labelCourseOnDirector.setBounds(5,10,50,30);
+    JTextField textFieldCourseOnDirector = new JTextField(10);
+    textFieldCourseOnDirector.setBounds(120, 10, 150,30);
+
+    JLabel labelNumberStudentOnDirector = new JLabel("No. de estudiantes");
+    labelNumberStudentOnDirector.setBounds(5,15,50,30);
+    JTextField textFieldNumberStudentOnDirector = new JTextField(10);
+    textFieldNumberStudentOnDirector.setBounds(120, 15, 150,30);
+
+    JLabel labelNumberPersonalTeacherOnDirector = new JLabel("No. de Personal");
+    labelNumberPersonalTeacherOnDirector.setBounds(5,20,50,30);
+    JTextField textFieldNumberPersonalTeacherOnDirector = new JTextField(10);
+    textFieldNumberPersonalTeacherOnDirector.setBounds(120, 20, 150,30);
+
+    //Input y labels de Admin en Director
+    JLabel labelNameAdminOnDirector = new JLabel("Nombre Admin");
+    labelNameAdminOnDirector.setBounds(50,30,100,30);
+    JTextField jtextfieldNameAdminOnDirector = new JTextField(10);
+    jtextfieldNameAdminOnDirector.setBounds(50,30,100,30);
+
+    JLabel labelRoleAdminOnDirector = new JLabel("Puesto");
+    labelRoleAdminOnDirector.setBounds(50,35,100,30);
+    JTextField jtextfieldRoleAdminOnDirector = new JTextField(10);
+    jtextfieldRoleAdminOnDirector.setBounds(50,35,100,30);
 
     JPanel JPanel_director = new JPanel();
-    JPanel_director.add(btnAcceptDirector);
-    JPanel_director.add(btnCancelDirector);
+    JPanel_director.add(labelNameProfesorOnDirector);
+    JPanel_director.add(textFieldNameProfesorOnDirector);
+    JPanel_director.add(labelCourseOnDirector);
+    JPanel_director.add(textFieldCourseOnDirector);
+    JPanel_director.add(labelNumberStudentOnDirector);
+    JPanel_director.add(textFieldNumberStudentOnDirector);
+    JPanel_director.add(labelNumberPersonalTeacherOnDirector);
+    JPanel_director.add(textFieldNumberPersonalTeacherOnDirector);
+
+    JPanel_director.add(labelNameAdminOnDirector);
+    JPanel_director.add(jtextfieldNameAdminOnDirector);
+    JPanel_director.add(labelRoleAdminOnDirector);
+    JPanel_director.add(jtextfieldRoleAdminOnDirector);
+
+    JPanel_director.add(btnAddDirector);
+    JPanel_director.add(btnDeleteDirector);
 
     JScrollPane scrollPane_director = new JScrollPane();
     JInternalFrame_director.add(scrollPane_director, BorderLayout.CENTER);
@@ -104,23 +205,69 @@ class School implements ActionListener {
     JInternalFrame_director.add(JPanel_director);
     JDesktopPane_myDesktopPane.add(JInternalFrame_director);
 
+    //TODO: Estas usando el InternalFrame de Admin, lee la descripcion
     /*
      * Seccion de los administradores
+     * Debe tener un crud funcional con
+     * Estudiantes
      * */
-
     JInternalFrame_administrator = new JInternalFrame("Administradores", true, true, true, true);
-    JInternalFrame_administrator.setSize(400,300);
+    JInternalFrame_administrator.setSize(500,400);
     JInternalFrame_administrator.setVisible(false);
     JInternalFrame_administrator.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-    JButton btnAcceptAdmin = new JButton("Aceptar");
-    btnAcceptAdmin.setBounds(100,150,100,30);
-    JButton btnCancelAdmin = new JButton("Cancelar");
-    btnCancelAdmin.setBounds(100,150,100,30);
+    //Agregando el JLabel Y TextField
+    JLabel jlabelNameStudentOnAdmin = new JLabel("Nombre");
+    jlabelNameStudentOnAdmin.setBounds(5,5,100,30);
+    JTextField jtexfieldNameStudenOnAdmin = new JTextField(10);
+    jtexfieldNameStudenOnAdmin.setBounds(5,5,100,30);
+
+    JLabel jlabelDNIStudentOnAdmin = new JLabel("Matricula");
+    jlabelDNIStudentOnAdmin.setBounds(5,10,100,30);
+    JTextField jtexfieldDNIStudenOnAdmin = new JTextField(10);
+    jtexfieldDNIStudenOnAdmin.setBounds(5,10,100,30);
+
+    JLabel jlabelTeacherStudentOnAdmin = new JLabel("Maestro");
+    jlabelTeacherStudentOnAdmin.setBounds(5,5,100,30);
+    JTextField jtexfieldTeacherStudentOnAdmin = new JTextField(10);
+    jtexfieldTeacherStudentOnAdmin.setBounds(5,5,100,30);
+
+    JLabel jlabelCourseStudentOnAdmin = new JLabel("Curso");
+    jlabelCourseStudentOnAdmin.setBounds(5,10,100,30);
+    JTextField jtexfieldCourseStudenOnAdmin = new JTextField(10);
+    jtexfieldCourseStudenOnAdmin.setBounds(5,10,100,30);
+
+    JLabel jlabelScoreStudentOnAdmin = new JLabel("Calificacion");
+    jlabelScoreStudentOnAdmin.setBounds(5,5,100,30);
+    JTextField jtexfieldScoreStudentOnAdmin = new JTextField(10);
+    jtexfieldScoreStudentOnAdmin.setBounds(5,5,100,30);
+
+    JLabel jlabelDateStudentOnAdmin = new JLabel("Fecha");
+    jlabelDateStudentOnAdmin.setBounds(5,10,100,30);
+    JTextField jtexfieldDateStudenOnAdmin = new JTextField(10);
+    jtexfieldDateStudenOnAdmin.setBounds(5,10,100,30);
+
+    JButton btnAddStudentOnAdmin = new JButton("Agregar");
+    btnAddStudentOnAdmin.setBounds(100,150,100,30);
+    JButton btnDeleteStudentOnAdmin = new JButton("Eliminar");
+    btnDeleteStudentOnAdmin.setBounds(100,150,100,30);
 
     JPanel JPanel_administrator = new JPanel();
-    JPanel_administrator.add(btnAcceptAdmin);
-    JPanel_administrator.add(btnCancelAdmin);
+    JPanel_administrator.add(jlabelNameStudentOnAdmin);
+    JPanel_administrator.add(jtexfieldNameStudenOnAdmin);
+    JPanel_administrator.add(jlabelDNIStudentOnAdmin);
+    JPanel_administrator.add(jtexfieldDNIStudenOnAdmin);
+    JPanel_administrator.add(jlabelTeacherStudentOnAdmin);
+    JPanel_administrator.add(jtexfieldTeacherStudentOnAdmin);
+    JPanel_administrator.add(jlabelCourseStudentOnAdmin);
+    JPanel_administrator.add(jtexfieldCourseStudenOnAdmin);
+    JPanel_administrator.add(jlabelScoreStudentOnAdmin);
+    JPanel_administrator.add(jtexfieldScoreStudentOnAdmin);
+    JPanel_administrator.add(jlabelDateStudentOnAdmin);
+    JPanel_administrator.add(jtexfieldDateStudenOnAdmin);
+
+    JPanel_administrator.add(btnAddStudentOnAdmin);
+    JPanel_administrator.add(btnDeleteStudentOnAdmin);
 
     JScrollPane scrollPane_admin = new JScrollPane();
     JInternalFrame_administrator.add(scrollPane_admin, BorderLayout.CENTER);
