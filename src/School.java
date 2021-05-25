@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
@@ -253,10 +254,10 @@ class School implements ActionListener {
     });
 
     //TODO Trabajando con JTable
-    String[] columnNameDirector = {"", "", ""};
+    String[] columnNameDirector = {"Profesor - Curso - # Estudiante", "# Personal", "Nombre Admin", "Puesto"};
     Object[][] dataDirector = {
-      {"", "", ""},
-      {"", "", ""}
+      {"", "", "",""},
+      {"", "", "", ""}
     };
 
     JTable tableDirector = new JTable(dataDirector, columnNameDirector);
@@ -277,6 +278,8 @@ class School implements ActionListener {
     JPanel_director.add(textfieldRoleAdminOnDirector);
     JPanel_director.add(btnAddDirector);
     JPanel_director.add(btnDeleteDirector);
+
+    JPanel_director.setBorder(new EmptyBorder(0,0,40,0));
 
     JScrollPane scrollPane_director = new JScrollPane(tableDirector);
     JInternalFrame_director.add(scrollPane_director, BorderLayout.CENTER);
@@ -370,6 +373,9 @@ class School implements ActionListener {
     JPanel_administrator.add(btnDeleteStudentOnAdmin);
 
     JScrollPane scrollPane_admin = new JScrollPane(tableAdmin);
+    //Creando EmptyBorder
+    JPanel_administrator.setBorder(new EmptyBorder(0,0,40,0));
+
     JInternalFrame_administrator.add(scrollPane_admin, BorderLayout.CENTER);
     JInternalFrame_administrator.add(JPanel_administrator, BorderLayout.PAGE_END);
     JDesktopPane_myDesktopPane.add(JInternalFrame_administrator);
