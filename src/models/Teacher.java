@@ -1,20 +1,20 @@
 package models;
 
 public class Teacher {
-  private  int personaNumber;
+  private String personaNumber;
   private String name;
   private String course;
 
-  public Teacher(int personaNumber, String name, String course) {
+  public Teacher(String personaNumber, String name, String course) {
     this.personaNumber = personaNumber;
     this.name = name;
     this.course = course;
   }
 
-  public int getPersonaNumber() {
+  public String getPersonaNumber() {
     return personaNumber;
   }
-  public void setPersonaNumber(int personaNumber) {
+  public void setPersonaNumber(String personaNumber) {
     this.personaNumber = personaNumber;
   }
 

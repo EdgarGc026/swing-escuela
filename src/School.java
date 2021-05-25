@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +19,7 @@ class School implements ActionListener {
   School(){
     //Creamos el frame principal
     JFrame_myFrame = new JFrame("Registro escolar");
-    JFrame_myFrame.setSize(800,600);
+    JFrame_myFrame.setSize(900,700);
     JFrame_myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     //Creamos un menuBar
@@ -43,7 +45,7 @@ class School implements ActionListener {
     * Solo puedes ver las materias.
     * */
     JInternalFrame_student = new JInternalFrame("Estudiantes", true, true,true,true);
-    JInternalFrame_student.setSize(550,400);
+    JInternalFrame_student.setSize(700,500);
     JInternalFrame_student.setVisible(false);
     JInternalFrame_student.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
@@ -88,8 +90,16 @@ class School implements ActionListener {
       }
     });
 
-    JScrollPane scrollPane_student = new JScrollPane();
-    JInternalFrame_student.add(scrollPane_student, BorderLayout.CENTER);
+    /*TODO: Creando los InternalFrame de los estudiantes
+    * Column y Rows para los JInternalFame
+    * */
+    String[] columnStudents = {"Nombre", "Materia", "Calificacion"};
+    Object[][] dataStudents = {{"Juanito", "Español", "6"}, {"Pepito", "Ciecias", "7"}, {"Albterto", "Historia", "8"}};
+    JTable tableStudent = new JTable(dataStudents, columnStudents);
+    printDataStudent(tableStudent);
+
+    JScrollPane scrollPane_student = new JScrollPane(tableStudent);
+    JInternalFrame_student.add(scrollPane_student);
     JPanel JPanel_student = new JPanel();
     JPanel_student.add(labelName);
     JPanel_student.add(textfieldName);
@@ -99,7 +109,9 @@ class School implements ActionListener {
     JPanel_student.add(textfieldScore);
     JPanel_student.add(btnAddStudent);
     JPanel_student.add(btnDeleteStudent);
-    JInternalFrame_student.add(JPanel_student);
+
+    JInternalFrame_student.add(scrollPane_student, BorderLayout.CENTER);
+    JInternalFrame_student.add(JPanel_student, BorderLayout.PAGE_END);
     JDesktopPane_myDesktopPane.add(JInternalFrame_student);
 
     /*TODO: Usando el JInternaFrame de los Maestros
@@ -107,14 +119,9 @@ class School implements ActionListener {
     * Estudiantes y sus calificaciones
     * */
     JInternalFrame_teacher = new JInternalFrame("Maestros", true, true, true, true);
-    JInternalFrame_teacher.setSize(400,300);
+    JInternalFrame_teacher.setSize(720,500);
     JInternalFrame_teacher.setVisible(false);
     JInternalFrame_teacher.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
-    JButton btnAddTeacher = new JButton("Agregar");
-    btnAddTeacher.setBounds(100,150,100,30);
-    JButton btnDeleteTeacher = new JButton("Eliminar");
-    btnDeleteTeacher.setBounds(100,150,100,30);
 
     JLabel labelNameStudentOnTeacher = new JLabel("Nombre");
     labelNameStudentOnTeacher.setBounds(5,15,50,30);
@@ -131,8 +138,32 @@ class School implements ActionListener {
     JTextField textFieldScoreStudentOnTeacher = new JTextField(10);
     textFieldScoreStudentOnTeacher.setBounds(120, 15, 150,30);
 
-    JScrollPane scrollPane_teacher = new JScrollPane();
-    JInternalFrame_teacher.add(scrollPane_teacher, BorderLayout.CENTER);
+    JButton btnAddTeacher = new JButton("Agregar");
+    btnAddTeacher.setBounds(100,150,100,30);
+    btnAddTeacher.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println("Boton maestro agregar, con todo papi");
+      }
+    });
+
+    JButton btnDeleteTeacher = new JButton("Eliminar");
+    btnDeleteTeacher.setBounds(100,150,100,30);
+    btnDeleteTeacher.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println("Delete Maestro al pedo, parce");
+      }
+    });
+    /*TODO: Trabajando con la tabla del CRUD de Maestros
+     * JTable
+     * */
+    String[] columnNameTeacher =  {"Nombre", "Materia", "Calificacion"};
+    Object[][] dataTeacher = {{"Juanito", "Español", "6"}, {"Pepito", "Ciecias", "7"}, {"Albterto", "Historia", "8"}};
+    JTable tableTeacher = new JTable(dataTeacher, columnNameTeacher);
+    printDataTeacher(tableTeacher);
+
+    JScrollPane scrollPane_teacher = new JScrollPane(tableTeacher);
     JPanel JPanel_teacher = new JPanel();
     JPanel_teacher.add(labelNameStudentOnTeacher);
     JPanel_teacher.add(textFieldNameStudentOnTeacher);
@@ -143,8 +174,10 @@ class School implements ActionListener {
 
     JPanel_teacher.add(btnAddTeacher);
     JPanel_teacher.add(btnDeleteTeacher);
-    JInternalFrame_teacher.add(JPanel_teacher);
+    JInternalFrame_teacher.add(scrollPane_teacher, BorderLayout.CENTER);
+    JInternalFrame_teacher.add(JPanel_teacher, BorderLayout.PAGE_END);
     JDesktopPane_myDesktopPane.add(JInternalFrame_teacher);
+
 
     /*TODO: Estas usando el InternalFrame de los directores
     * Seccion JIntenalFrame de los directores
@@ -152,12 +185,12 @@ class School implements ActionListener {
     * Profesor y Administrador
     * */
     JInternalFrame_director = new JInternalFrame("Directores", true, true, true, true);
-    JInternalFrame_director.setSize(630,400);
+    JInternalFrame_director.setSize(730,500);
     JInternalFrame_director.setVisible(false);
     JInternalFrame_director.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
     //Agregando los inputs y labels
-    JLabel labelNameProfesorOnDirector = new JLabel("Nombre Profesor");
+    JLabel labelNameProfesorOnDirector = new JLabel("Profesor");
     labelNameProfesorOnDirector.setBounds(5,5,50,30);
     JTextField textfieldNameProfesorOnDirector = new JTextField(10);
     textfieldNameProfesorOnDirector.setBounds(120, 5, 150,30);
@@ -167,12 +200,12 @@ class School implements ActionListener {
     JTextField textfieldCourseOnDirector = new JTextField(10);
     textfieldCourseOnDirector.setBounds(120, 10, 150,30);
 
-    JLabel labelNumberStudentOnDirector = new JLabel("No. de estudiantes");
+    JLabel labelNumberStudentOnDirector = new JLabel("# Estudiantes");
     labelNumberStudentOnDirector.setBounds(5,15,50,30);
     JTextField textfieldNumberStudentOnDirector = new JTextField(10);
     textfieldNumberStudentOnDirector.setBounds(120, 15, 150,30);
 
-    JLabel labelNumberPersonalTeacherOnDirector = new JLabel("No. de Personal");
+    JLabel labelNumberPersonalTeacherOnDirector = new JLabel("# Personal");
     labelNumberPersonalTeacherOnDirector.setBounds(5,20,50,30);
     JTextField textfieldNumberPersonalTeacherOnDirector = new JTextField(10);
     textfieldNumberPersonalTeacherOnDirector.setBounds(120, 20, 150,30);
@@ -219,6 +252,16 @@ class School implements ActionListener {
       }
     });
 
+    //TODO Trabajando con JTable
+    String[] columnNameDirector = {"", "", ""};
+    Object[][] dataDirector = {
+      {"", "", ""},
+      {"", "", ""}
+    };
+
+    JTable tableDirector = new JTable(dataDirector, columnNameDirector);
+    printDataDirector(tableDirector);
+
     JPanel JPanel_director = new JPanel();
     JPanel_director.add(labelNameProfesorOnDirector);
     JPanel_director.add(textfieldNameProfesorOnDirector);
@@ -235,9 +278,9 @@ class School implements ActionListener {
     JPanel_director.add(btnAddDirector);
     JPanel_director.add(btnDeleteDirector);
 
-    JScrollPane scrollPane_director = new JScrollPane();
+    JScrollPane scrollPane_director = new JScrollPane(tableDirector);
     JInternalFrame_director.add(scrollPane_director, BorderLayout.CENTER);
-    JInternalFrame_director.add(JPanel_director);
+    JInternalFrame_director.add(JPanel_director, BorderLayout.PAGE_END);
     JDesktopPane_myDesktopPane.add(JInternalFrame_director);
 
     //TODO: Estas usando el InternalFrame de Admin, lee la descripcion
@@ -247,7 +290,7 @@ class School implements ActionListener {
      * Estudiantes
      * */
     JInternalFrame_administrator = new JInternalFrame("Administradores", true, true, true, true);
-    JInternalFrame_administrator.setSize(500,400);
+    JInternalFrame_administrator.setSize(700,500);
     JInternalFrame_administrator.setVisible(false);
     JInternalFrame_administrator.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
@@ -284,8 +327,30 @@ class School implements ActionListener {
 
     JButton btnAddStudentOnAdmin = new JButton("Agregar");
     btnAddStudentOnAdmin.setBounds(100,150,100,30);
+    btnAddStudentOnAdmin.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println("Boton admin add puchao");
+      }
+    });
+
     JButton btnDeleteStudentOnAdmin = new JButton("Eliminar");
     btnDeleteStudentOnAdmin.setBounds(100,150,100,30);
+    btnDeleteStudentOnAdmin.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        System.out.println("Boton delete puchao");
+      }
+    });
+    String[] columnNameAdmin = {"Nombre - Matricula", "Maestro - Curso - Calificacion", "Fecha"};
+    Object[][] dataAdmin = {
+        {"Juanito - S1492384", "Pedro - Matematicas - 7", "12-01-2021"},
+        {"Juanito - S1492384", "Pedro - Matematicas - 7", "12-01-2021"},
+        {"Juanito - S1492384", "Pedro - Matematicas - 7", "12-01-2021"}
+    };
+
+    JTable tableAdmin = new JTable(dataAdmin, columnNameAdmin);
+    printDataAdmin(tableAdmin);
 
     JPanel JPanel_administrator = new JPanel();
     JPanel_administrator.add(jlabelNameStudentOnAdmin);
@@ -304,9 +369,9 @@ class School implements ActionListener {
     JPanel_administrator.add(btnAddStudentOnAdmin);
     JPanel_administrator.add(btnDeleteStudentOnAdmin);
 
-    JScrollPane scrollPane_admin = new JScrollPane();
+    JScrollPane scrollPane_admin = new JScrollPane(tableAdmin);
     JInternalFrame_administrator.add(scrollPane_admin, BorderLayout.CENTER);
-    JInternalFrame_administrator.add(JPanel_administrator);
+    JInternalFrame_administrator.add(JPanel_administrator, BorderLayout.PAGE_END);
     JDesktopPane_myDesktopPane.add(JInternalFrame_administrator);
 
     // Mostramos el Frame.
@@ -334,10 +399,70 @@ class School implements ActionListener {
     if (commandString.equals("Opciones administrador")){
       JInternalFrame_administrator.setVisible(true);
     }
-    //Esto es para la parte de los botones dentro del JInternalFrame
-    if(commandString.equals("Agregar")){
+  }
 
+  void printDataStudent(JTable tableStudent){
+    int numRows = tableStudent.getRowCount();
+    int numCols = tableStudent.getColumnCount();
+    TableModel modelStudent = tableStudent.getModel();
+
+    System.out.println("Valor de los datos");
+    for(int i = 0; i< numRows; i++){
+      System.out.println("| Row |" +i +":");
+      for(int j=0; j<numCols; j++){
+        System.out.print(" " +modelStudent.getValueAt(i, j));
+      }
+      System.out.println();
     }
+    System.out.println("-------------------");
+  }
+
+  void printDataTeacher(JTable tableTeacher){
+    int numRows = tableTeacher.getRowCount();
+    int numCols = tableTeacher.getColumnCount();
+    TableModel modelStudent = tableTeacher.getModel();
+
+    System.out.println("Valor de los datos");
+    for(int i = 0; i< numRows; i++){
+      System.out.println("| Row |" +i +":");
+      for(int j=0; j<numCols; j++){
+        System.out.print(" " +modelStudent.getValueAt(i, j));
+      }
+      System.out.println();
+    }
+    System.out.println("-------------------");
+  }
+
+  void printDataDirector(JTable tableDirector){
+    int numRows = tableDirector.getRowCount();
+    int numCols = tableDirector.getColumnCount();
+    TableModel modelStudent = tableDirector.getModel();
+
+    System.out.println("Valor de los datos");
+    for(int i = 0; i< numRows; i++){
+      System.out.println("| Row |" +i +":");
+      for(int j=0; j<numCols; j++){
+        System.out.print(" " +modelStudent.getValueAt(i, j));
+      }
+      System.out.println();
+    }
+    System.out.println("-------------------");
+  }
+
+  void printDataAdmin(JTable tableAdmin){
+    int numRows = tableAdmin.getRowCount();
+    int numCols = tableAdmin.getColumnCount();
+    TableModel modelStudent = tableAdmin.getModel();
+
+    System.out.println("Valor de los datos");
+    for(int i = 0; i< numRows; i++){
+      System.out.println("| Row |" +i +":");
+      for(int j=0; j<numCols; j++){
+        System.out.print(" " +modelStudent.getValueAt(i, j));
+      }
+      System.out.println();
+    }
+    System.out.println("-------------------");
   }
 
   void makeMenuStudent(){
