@@ -3,10 +3,15 @@ package models;
 public class Student {
   private String studentDNI;
   private String name;
-  private String teacher;
-  private String course;
-  private int score;
   private String date;
+  private CourseTeacher courseteacher;
+
+  public Student(String studentDNI, String name, String date, CourseTeacher courseteacher) {
+    this.studentDNI = studentDNI;
+    this.name = name;
+    this.date = date;
+    this.courseteacher = courseteacher;
+  }
 
   public String getStudentDNI() {
     return studentDNI;
@@ -14,31 +19,6 @@ public class Student {
 
   public void setStudentDNI(String studentDNI) {
     this.studentDNI = studentDNI;
-  }
-
-  public String getTeacher() {
-    return teacher;
-  }
-
-  public void setTeacher(String teacher) {
-    this.teacher = teacher;
-  }
-
-  public String getDate() {
-    return date;
-  }
-
-  public void setDate(String date) {
-    this.date = date;
-  }
-
-  public Student(String studentDNI, String name, String teacher, String course, int score, String date) {
-    this.studentDNI = studentDNI;
-    this.name = name;
-    this.teacher = teacher;
-    this.course = course;
-    this.score = score;
-    this.date = date;
   }
 
   public String getName() {
@@ -49,22 +29,29 @@ public class Student {
     this.name = name;
   }
 
-  public String getCourse() {
-    return course;
+  public String getDate() {
+    return date;
   }
 
-  public void setCourse(String course) {
-    this.course = course;
+  public void setDate(String date) {
+    this.date = date;
   }
 
-  public int getScore() { return score; }
-  public void setScore( int score ) { this.score = score; }
+  public CourseTeacher getCourseteacher() {
+    return courseteacher;
+  }
+
+  public void setCourseteacher(CourseTeacher courseteacher) {
+    this.courseteacher = courseteacher;
+  }
 
   @Override
   public String toString() {
-    return "Estudiante{" +
+    return "Student{" +
+      "studentDNI='" + studentDNI + '\'' +
       ", name='" + name + '\'' +
-      ", course='" + course + '\'' +
+      ", date='" + date + '\'' +
+      ", courseteacher=" + courseteacher +
     '}';
   }
 }
