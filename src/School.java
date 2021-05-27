@@ -7,12 +7,10 @@ import models.Student;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
 
 class School implements ActionListener {
   JMenuBar JMenuBar_myMenu;
@@ -58,21 +56,20 @@ class School implements ActionListener {
     JInternalFrame_student.setVisible(false);
     JInternalFrame_student.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-    //Agregando un Input y un label
-    JLabel labelName = new JLabel("Nombre");
-    labelName.setBounds(5,5,50,30);
-    JTextField textfieldName = new JTextField(10);
-    textfieldName.setBounds(120, 5, 150,30);
-
-    JLabel labelCourse = new JLabel("Curso");
-    labelCourse.setBounds(5,10,50,30);
-    JTextField textfieldCourse = new JTextField(10);
-    textfieldCourse.setBounds(120, 10, 150,30);
-
-    JLabel labelScore = new JLabel("Calificacion");
-    labelScore.setBounds(5,15,50,30);
-    JTextField textfieldScore = new JTextField(10);
-    textfieldScore.setBounds(120, 15, 150,30);
+    JLabel labelDNIStudent = new JLabel("Matricula");
+    JTextField texfieldStudentDNI = new JTextField(10);
+    JLabel labelNameStudent = new JLabel("Nombre");
+    JTextField textfieldNameStudent = new JTextField(10);
+    JLabel labelDateStudent = new JLabel("Fecha");
+    JTextField textfielDateStudent = new JTextField(10);
+    JLabel labelCourseStudent = new JLabel("Materia");
+    JTextField textfieldCourseStudent = new JTextField(10);
+    JLabel labelScoreStudent = new JLabel("Calificacion");
+    JTextField textfieldScoreStudent = new JTextField(10);
+    JLabel labelDNITeacherOnStudent = new JLabel("DNI");
+    JTextField texfieldDNITeacherOnStudent = new JTextField(10);
+    JLabel labelNameTeacherOnStudent = new JLabel("Profesor");
+    JTextField textfieldNameTeacherOnStudent = new JTextField(10);
 
     //Agregando los botones
     JButton btnAddStudent = new JButton("Agregar");
@@ -80,13 +77,21 @@ class School implements ActionListener {
     btnAddStudent.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        //System.out.println("Boton agregar estudiante al toque rey");
-        String dataTextfieldName = textfieldName.getText();
-        String dataTextfieldCourse = textfieldCourse.getText();
-        String dataTextfieldScore = textfieldScore.getText();
-        System.out.println("Obtenemos los datos de:" + dataTextfieldName);
-        System.out.println("Obtenemos los datos de:" + dataTextfieldCourse);
-        System.out.println("Obtenemos los datos de:" + dataTextfieldScore);
+        String dataTextfieldStudentDNI = texfieldStudentDNI.getText();
+        String dataTextfieldNameStudent = textfieldNameStudent.getText();
+        String dateTexfieldDateStudent = textfielDateStudent.getText();
+        String dataTextfieldCourseStudent = textfieldCourseStudent.getText();
+        String dataTextfieldScoreStudent = textfieldScoreStudent.getText();
+        String dataTextfieldNameTeacherStudent = textfieldNameTeacherOnStudent.getText();
+        String dataTexfieldDNITeacherStudent = texfieldDNITeacherOnStudent.getText();
+
+        System.out.println("Obtenemos los datos de:" + dataTextfieldStudentDNI);
+        System.out.println("Obtenemos los datos de:" + dataTextfieldNameStudent);
+        System.out.println("Obtenemos los datos de:" + dateTexfieldDateStudent);
+        System.out.println("Obtenemos los datos de:" + dataTextfieldCourseStudent);
+        System.out.println("Obtenemos los datos de:" + dataTextfieldScoreStudent);
+        System.out.println("Obtenemos los datos de:" + dataTextfieldNameTeacherStudent);
+        System.out.println("Obtenemos los datos de:" + dataTexfieldDNITeacherStudent);
       }
     });
 
@@ -99,27 +104,31 @@ class School implements ActionListener {
       }
     });
 
-    /*TODO: Creando los InternalFrame de los estudiantes
-    * Column y Rows para los JInternalFame
-    * */
-
-    //CRUDStudent crudStudent = new CRUDStudent(myData.students);
     JTable tableStudent = new JTable();
     tableStudent.setModel(new CRUDStudent(myData.students));
-    //printDataStudent(tableStudent);
 
     JScrollPane scrollPane_student = new JScrollPane(tableStudent);
     JInternalFrame_student.add(scrollPane_student);
     JPanel JPanel_student = new JPanel();
-    JPanel_student.add(labelName);
-    JPanel_student.add(textfieldName);
-    JPanel_student.add(labelCourse);
-    JPanel_student.add(textfieldCourse);
-    JPanel_student.add(labelScore);
-    JPanel_student.add(textfieldScore);
+
+    JPanel_student.add(labelDNIStudent);
+    JPanel_student.add(texfieldStudentDNI);
+    JPanel_student.add(labelNameStudent);
+    JPanel_student.add(textfieldNameStudent);
+    JPanel_student.add(labelDateStudent);
+    JPanel_student.add(textfielDateStudent);
+    JPanel_student.add(labelCourseStudent);
+    JPanel_student.add(textfieldCourseStudent);
+    JPanel_student.add(labelScoreStudent);
+    JPanel_student.add(textfieldScoreStudent);
+    JPanel_student.add(labelDNITeacherOnStudent);
+    JPanel_student.add(texfieldDNITeacherOnStudent);
+    JPanel_student.add(labelNameTeacherOnStudent);
+    JPanel_student.add(textfieldNameTeacherOnStudent);
     JPanel_student.add(btnAddStudent);
     JPanel_student.add(btnDeleteStudent);
 
+    JPanel_student.setBorder(new EmptyBorder(0,0,40,0));
     JInternalFrame_student.add(scrollPane_student, BorderLayout.CENTER);
     JInternalFrame_student.add(JPanel_student, BorderLayout.PAGE_END);
     JDesktopPane_myDesktopPane.add(JInternalFrame_student);
@@ -129,31 +138,26 @@ class School implements ActionListener {
     * Estudiantes y sus calificaciones
     * */
     JInternalFrame_teacher = new JInternalFrame("Maestros", true, true, true, true);
-    JInternalFrame_teacher.setSize(720,500);
+    JInternalFrame_teacher.setSize(700,500);
     JInternalFrame_teacher.setVisible(false);
     JInternalFrame_teacher.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-    JLabel labelNameStudentOnTeacher = new JLabel("Nombre");
-    labelNameStudentOnTeacher.setBounds(5,15,50,30);
-    JTextField textFieldNameStudentOnTeacher = new JTextField(10);
-    textFieldNameStudentOnTeacher.setBounds(120, 15, 150,30);
+    JLabel labelNameTeacher = new JLabel("Nombre");
+    JTextField textFieldNameTeacher = new JTextField(10);
 
-    JLabel labelCourseStudentOnTeacher = new JLabel("Materia");
-    labelCourseStudentOnTeacher.setBounds(5,15,50,30);
-    JTextField textFieldCourseStudentOnTeacher = new JTextField(10);
-    textFieldCourseStudentOnTeacher.setBounds(120, 15, 150,30);
-
-    JLabel labelScoreStudentOnTeacher = new JLabel("Calificacion");
-    labelScoreStudentOnTeacher.setBounds(5,15,50,30);
-    JTextField textFieldScoreStudentOnTeacher = new JTextField(10);
-    textFieldScoreStudentOnTeacher.setBounds(120, 15, 150,30);
+    JLabel labelDNITeacher = new JLabel("DNI");
+    JTextField textFieldDNITeacher = new JTextField(10);
 
     JButton btnAddTeacher = new JButton("Agregar");
     btnAddTeacher.setBounds(100,150,100,30);
     btnAddTeacher.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        System.out.println("Boton maestro agregar, con todo papi");
+        String dataNameTeacher = textFieldNameTeacher.getText();
+        String dataDNITeacher = textFieldDNITeacher.getText();
+
+        System.out.println("Obtenido de:" +dataNameTeacher);
+        System.out.println("Obtenido de:" +dataDNITeacher);
       }
     });
 
@@ -165,29 +169,22 @@ class School implements ActionListener {
         System.out.println("Delete Maestro al pedo, parce");
       }
     });
-    /*TODO: Trabajando con la tabla del CRUD de Maestros
-     * JTable
-     * */
 
     JTable tableTeacher = new JTable();
     tableTeacher.setModel(new CRUDTeacher(myData.teachers));
-    //printDataTeacher(tableTeacher);
 
     JScrollPane scrollPane_teacher = new JScrollPane(tableTeacher);
     JPanel JPanel_teacher = new JPanel();
-    JPanel_teacher.add(labelNameStudentOnTeacher);
-    JPanel_teacher.add(textFieldNameStudentOnTeacher);
-    JPanel_teacher.add(labelCourseStudentOnTeacher);
-    JPanel_teacher.add(textFieldCourseStudentOnTeacher);
-    JPanel_teacher.add(labelScoreStudentOnTeacher);
-    JPanel_teacher.add(textFieldScoreStudentOnTeacher);
-
+    JPanel_teacher.add(labelNameTeacher);
+    JPanel_teacher.add(textFieldNameTeacher);
+    JPanel_teacher.add(labelDNITeacher);
+    JPanel_teacher.add(textFieldDNITeacher);
     JPanel_teacher.add(btnAddTeacher);
     JPanel_teacher.add(btnDeleteTeacher);
+
     JInternalFrame_teacher.add(scrollPane_teacher, BorderLayout.CENTER);
     JInternalFrame_teacher.add(JPanel_teacher, BorderLayout.PAGE_END);
     JDesktopPane_myDesktopPane.add(JInternalFrame_teacher);
-
 
     /*TODO: Estas usando el InternalFrame de los directores
     * Seccion JIntenalFrame de los directores
@@ -200,36 +197,10 @@ class School implements ActionListener {
     JInternalFrame_director.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
     //Agregando los inputs y labels
-    JLabel labelNameProfesorOnDirector = new JLabel("Profesor");
-    labelNameProfesorOnDirector.setBounds(5,5,50,30);
-    JTextField textfieldNameProfesorOnDirector = new JTextField(10);
-    textfieldNameProfesorOnDirector.setBounds(120, 5, 150,30);
-
-    JLabel labelCourseOnDirector = new JLabel("Curso");
-    labelCourseOnDirector.setBounds(5,10,50,30);
-    JTextField textfieldCourseOnDirector = new JTextField(10);
-    textfieldCourseOnDirector.setBounds(120, 10, 150,30);
-
-    JLabel labelNumberStudentOnDirector = new JLabel("# Estudiantes");
-    labelNumberStudentOnDirector.setBounds(5,15,50,30);
-    JTextField textfieldNumberStudentOnDirector = new JTextField(10);
-    textfieldNumberStudentOnDirector.setBounds(120, 15, 150,30);
-
-    JLabel labelNumberPersonalTeacherOnDirector = new JLabel("# Personal");
-    labelNumberPersonalTeacherOnDirector.setBounds(5,20,50,30);
-    JTextField textfieldNumberPersonalTeacherOnDirector = new JTextField(10);
-    textfieldNumberPersonalTeacherOnDirector.setBounds(120, 20, 150,30);
-
-    //Input y labels de Admin en Director
-    JLabel labelNameAdminOnDirector = new JLabel("Nombre Admin");
-    labelNameAdminOnDirector.setBounds(50,30,100,30);
-    JTextField textfieldNameAdminOnDirector = new JTextField(10);
-    textfieldNameAdminOnDirector.setBounds(50,30,100,30);
-
-    JLabel labelRoleAdminOnDirector = new JLabel("Puesto");
-    labelRoleAdminOnDirector.setBounds(50,35,100,30);
-    JTextField textfieldRoleAdminOnDirector = new JTextField(10);
-    textfieldRoleAdminOnDirector.setBounds(50,35,100,30);
+    JLabel labelNameDirector = new JLabel("Nombre");
+    JTextField textfieldNameDirector = new JTextField(10);
+    JLabel labelJobDirector = new JLabel("Puesto");
+    JTextField textfieldJobDirector = new JTextField(10);
 
     //Agregando los botones
     JButton btnAddDirector = new JButton("Agregar");
@@ -238,19 +209,11 @@ class School implements ActionListener {
       @Override
       public void actionPerformed(ActionEvent e) {
         System.out.println("Boton agregar del director al toque mi rey");
-        String dataTextfieldNameProfesorOnDirector = textfieldNameProfesorOnDirector.getText();
-        String dataTextfieldCourseOnDirector = textfieldCourseOnDirector.getText();
-        String dataTextfieldNumberStudentOnDirector = textfieldNumberStudentOnDirector.getText();
-        String dataTextfieldNumberPersonalTeacherOnDirector = textfieldNumberPersonalTeacherOnDirector.getText();
-        String dataTextfieldNameAdminOnDirector = textfieldNameAdminOnDirector.getText();
-        String dataTextfieldRoleAdminOnDirector = textfieldRoleAdminOnDirector.getText();
+        String dataTextfieldNameDirector = textfieldNameDirector.getText();
+        String dataTextfieldJobDirector = textfieldJobDirector.getText();
 
-        System.out.println("Obtenido del: " +dataTextfieldNameProfesorOnDirector);
-        System.out.println("Obtenido del: " +dataTextfieldCourseOnDirector);
-        System.out.println("Obtenido del: " +dataTextfieldNumberStudentOnDirector);
-        System.out.println("Obtenido del: " +dataTextfieldNumberPersonalTeacherOnDirector);
-        System.out.println("Obtenido del: " +dataTextfieldNameAdminOnDirector);
-        System.out.println("Obtenido del: "+dataTextfieldRoleAdminOnDirector);
+        System.out.println("Obtenido del: " +dataTextfieldNameDirector);
+        System.out.println("Obtenido del: " +dataTextfieldJobDirector);
       }
     });
     JButton btnDeleteDirector = new JButton("Eliminar");
@@ -262,29 +225,16 @@ class School implements ActionListener {
       }
     });
 
-    //TODO Trabajando con JTable
-
     JTable tableDirector = new JTable();
     tableDirector.setModel(new CRUDDirector(myData.directors));
-    //printDataDirector(tableDirector);
 
     JPanel JPanel_director = new JPanel();
-    JPanel_director.add(labelNameProfesorOnDirector);
-    JPanel_director.add(textfieldNameProfesorOnDirector);
-    JPanel_director.add(labelCourseOnDirector);
-    JPanel_director.add(textfieldCourseOnDirector);
-    JPanel_director.add(labelNumberStudentOnDirector);
-    JPanel_director.add(textfieldNumberStudentOnDirector);
-    JPanel_director.add(labelNumberPersonalTeacherOnDirector);
-    JPanel_director.add(textfieldNumberPersonalTeacherOnDirector);
-    JPanel_director.add(labelNameAdminOnDirector);
-    JPanel_director.add(textfieldNameAdminOnDirector);
-    JPanel_director.add(labelRoleAdminOnDirector);
-    JPanel_director.add(textfieldRoleAdminOnDirector);
+    JPanel_director.add(labelNameDirector);
+    JPanel_director.add(textfieldNameDirector);
+    JPanel_director.add(labelJobDirector);
+    JPanel_director.add(textfieldJobDirector);
     JPanel_director.add(btnAddDirector);
     JPanel_director.add(btnDeleteDirector);
-
-    JPanel_director.setBorder(new EmptyBorder(0,0,40,0));
 
     JScrollPane scrollPane_director = new JScrollPane(tableDirector);
     JInternalFrame_director.add(scrollPane_director, BorderLayout.CENTER);
@@ -303,42 +253,22 @@ class School implements ActionListener {
     JInternalFrame_administrator.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
     //Agregando el JLabel Y TextField
-    JLabel jlabelNameStudentOnAdmin = new JLabel("Nombre");
-    jlabelNameStudentOnAdmin.setBounds(5,5,100,30);
-    JTextField jtexfieldNameStudenOnAdmin = new JTextField(10);
-    jtexfieldNameStudenOnAdmin.setBounds(5,5,100,30);
+    JLabel labelNameAdmin = new JLabel("Nombre");
+    JTextField texfieldNameAdmin = new JTextField(10);
 
-    JLabel jlabelDNIStudentOnAdmin = new JLabel("Matricula");
-    jlabelDNIStudentOnAdmin.setBounds(5,10,100,30);
-    JTextField jtexfieldDNIStudenOnAdmin = new JTextField(10);
-    jtexfieldDNIStudenOnAdmin.setBounds(5,10,100,30);
-
-    JLabel jlabelTeacherStudentOnAdmin = new JLabel("Maestro");
-    jlabelTeacherStudentOnAdmin.setBounds(5,5,100,30);
-    JTextField jtexfieldTeacherStudentOnAdmin = new JTextField(10);
-    jtexfieldTeacherStudentOnAdmin.setBounds(5,5,100,30);
-
-    JLabel jlabelCourseStudentOnAdmin = new JLabel("Curso");
-    jlabelCourseStudentOnAdmin.setBounds(5,10,100,30);
-    JTextField jtexfieldCourseStudenOnAdmin = new JTextField(10);
-    jtexfieldCourseStudenOnAdmin.setBounds(5,10,100,30);
-
-    JLabel jlabelScoreStudentOnAdmin = new JLabel("Calificacion");
-    jlabelScoreStudentOnAdmin.setBounds(5,5,100,30);
-    JTextField jtexfieldScoreStudentOnAdmin = new JTextField(10);
-    jtexfieldScoreStudentOnAdmin.setBounds(5,5,100,30);
-
-    JLabel jlabelDateStudentOnAdmin = new JLabel("Fecha");
-    jlabelDateStudentOnAdmin.setBounds(5,10,100,30);
-    JTextField jtexfieldDateStudenOnAdmin = new JTextField(10);
-    jtexfieldDateStudenOnAdmin.setBounds(5,10,100,30);
+    JLabel labelJobAdmin = new JLabel("Puesto");
+    JTextField texfieldJobAdmin = new JTextField(10);
 
     JButton btnAddStudentOnAdmin = new JButton("Agregar");
     btnAddStudentOnAdmin.setBounds(100,150,100,30);
     btnAddStudentOnAdmin.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        System.out.println("Boton admin add puchao");
+        String dataNameAdmin = texfieldNameAdmin.getText();
+        String dataJobAdmin = texfieldJobAdmin.getText();
+
+        System.out.println("Obteniendo datos de: " +dataNameAdmin);
+        System.out.println("Obteniendo datos de: " +dataJobAdmin);
       }
     });
 
@@ -354,27 +284,15 @@ class School implements ActionListener {
     JTable tableAdmin = new JTable();
     tableAdmin.setModel(new CRUDAdmin(myData.admins));
 
-
     JPanel JPanel_administrator = new JPanel();
-    JPanel_administrator.add(jlabelNameStudentOnAdmin);
-    JPanel_administrator.add(jtexfieldNameStudenOnAdmin);
-    JPanel_administrator.add(jlabelDNIStudentOnAdmin);
-    JPanel_administrator.add(jtexfieldDNIStudenOnAdmin);
-    JPanel_administrator.add(jlabelTeacherStudentOnAdmin);
-    JPanel_administrator.add(jtexfieldTeacherStudentOnAdmin);
-    JPanel_administrator.add(jlabelCourseStudentOnAdmin);
-    JPanel_administrator.add(jtexfieldCourseStudenOnAdmin);
-    JPanel_administrator.add(jlabelScoreStudentOnAdmin);
-    JPanel_administrator.add(jtexfieldScoreStudentOnAdmin);
-    JPanel_administrator.add(jlabelDateStudentOnAdmin);
-    JPanel_administrator.add(jtexfieldDateStudenOnAdmin);
+    JPanel_administrator.add(labelNameAdmin);
+    JPanel_administrator.add(texfieldNameAdmin);
+    JPanel_administrator.add(labelJobAdmin);
+    JPanel_administrator.add(texfieldJobAdmin);
     JPanel_administrator.add(btnAddStudentOnAdmin);
     JPanel_administrator.add(btnDeleteStudentOnAdmin);
 
     JScrollPane scrollPane_admin = new JScrollPane(tableAdmin);
-    //Creando EmptyBorder
-    JPanel_administrator.setBorder(new EmptyBorder(0,0,40,0));
-
     JInternalFrame_administrator.add(scrollPane_admin, BorderLayout.CENTER);
     JInternalFrame_administrator.add(JPanel_administrator, BorderLayout.PAGE_END);
     JDesktopPane_myDesktopPane.add(JInternalFrame_administrator);
