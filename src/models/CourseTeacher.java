@@ -25,11 +25,7 @@ public class CourseTeacher {
     this.teacher = teacher;
   }
 
-  @Override
-  public String toString() {
-    return "CourseTeacher{" +
-        "course=" + course +
-        ", teacher=" + teacher +
-        '}';
+  public String toStringCourseTeacher() {
+    return this.course + "," + this.teacher;
   }
 }

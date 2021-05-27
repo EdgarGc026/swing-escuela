@@ -45,13 +45,7 @@ public class Student {
     this.courseteacher = courseteacher;
   }
 
-  @Override
-  public String toString() {
-    return "Student{" +
-      "studentDNI='" + studentDNI + '\'' +
-      ", name='" + name + '\'' +
-      ", date='" + date + '\'' +
-      ", courseteacher=" + courseteacher +
-    '}';
+  public String toStringStudent() {
+    return this.studentDNI + ',' + this.name + ',' + this.date + ',' + this.courseteacher;
   }
 }

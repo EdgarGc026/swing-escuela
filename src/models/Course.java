@@ -24,11 +24,7 @@ public class Course {
     this.name = name;
   }
 
-  @Override
-  public String toString() {
-    return "Course{" +
-      "name='" + name + '\'' +
-      ", score=" + score +
-    '}';
+  public String toStringCourse() {
+    return this.name+ "," +this.score;
   }
 }

@@ -24,4 +24,8 @@ public class Admin {
   public void setJob(String job) {
     this.job = job;
   }
+
+  public String toStringAdmin() {
+    return this.name + "," +this.name;
+  }
 }
