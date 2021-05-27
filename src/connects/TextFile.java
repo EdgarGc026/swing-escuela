@@ -1,4 +1,4 @@
-package connect;
+package connects;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,12 +12,12 @@ public class TextFile {
 	private String tempFileName;
   	
 	public TextFile(String filename){
-		this.filename = "connect/"+filename;	
+		this.filename = "connects/" +filename;
 	}
 
 	public TextFile(String filename,String tempFileName){
-		this.filename = "connect/"+filename;	
-		this.tempFileName = "connect/"+tempFileName;	
+		this.filename = "connects/" +filename;
+		this.tempFileName = "connects/" +tempFileName;
 	}
 
 	public boolean insertOnFileText(String text){

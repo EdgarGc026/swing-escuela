@@ -1,3 +1,10 @@
+import adapters.CRUDAdmin;
+import adapters.CRUDDirector;
+import adapters.CRUDStudent;
+import adapters.CRUDTeacher;
+import datas.Data;
+import models.Student;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -5,6 +12,7 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 class School implements ActionListener {
   JMenuBar JMenuBar_myMenu;
@@ -32,7 +40,7 @@ class School implements ActionListener {
     makeMenuTeacher();
     makeMenuDirector();
     makeMenuAdmin();
-
+    Data myData = new Data();
     JFrame_myFrame.setJMenuBar(JMenuBar_myMenu);
 
     //Creamos un JDesktopPane  para nuestro programa MDI, Multiple Document Interface
@@ -94,10 +102,11 @@ class School implements ActionListener {
     /*TODO: Creando los InternalFrame de los estudiantes
     * Column y Rows para los JInternalFame
     * */
-    String[] columnStudents = {"Nombre", "Materia", "Calificacion"};
-    Object[][] dataStudents = {{"Juanito", "Español", "6"}, {"Pepito", "Ciecias", "7"}, {"Albterto", "Historia", "8"}};
-    JTable tableStudent = new JTable(dataStudents, columnStudents);
-    printDataStudent(tableStudent);
+
+    //CRUDStudent crudStudent = new CRUDStudent(myData.students);
+    JTable tableStudent = new JTable();
+    tableStudent.setModel(new CRUDStudent(myData.students));
+    //printDataStudent(tableStudent);
 
     JScrollPane scrollPane_student = new JScrollPane(tableStudent);
     JInternalFrame_student.add(scrollPane_student);
@@ -159,10 +168,10 @@ class School implements ActionListener {
     /*TODO: Trabajando con la tabla del CRUD de Maestros
      * JTable
      * */
-    String[] columnNameTeacher =  {"Nombre", "Materia", "Calificacion"};
-    Object[][] dataTeacher = {{"Juanito", "Español", "6"}, {"Pepito", "Ciecias", "7"}, {"Albterto", "Historia", "8"}};
-    JTable tableTeacher = new JTable(dataTeacher, columnNameTeacher);
-    printDataTeacher(tableTeacher);
+
+    JTable tableTeacher = new JTable();
+    tableTeacher.setModel(new CRUDTeacher(myData.teachers));
+    //printDataTeacher(tableTeacher);
 
     JScrollPane scrollPane_teacher = new JScrollPane(tableTeacher);
     JPanel JPanel_teacher = new JPanel();
@@ -254,14 +263,10 @@ class School implements ActionListener {
     });
 
     //TODO Trabajando con JTable
-    String[] columnNameDirector = {"Profesor - Curso - # Estudiante", "# Personal", "Nombre Admin", "Puesto"};
-    Object[][] dataDirector = {
-      {"", "", "",""},
-      {"", "", "", ""}
-    };
 
-    JTable tableDirector = new JTable(dataDirector, columnNameDirector);
-    printDataDirector(tableDirector);
+    JTable tableDirector = new JTable();
+    tableDirector.setModel(new CRUDDirector(myData.directors));
+    //printDataDirector(tableDirector);
 
     JPanel JPanel_director = new JPanel();
     JPanel_director.add(labelNameProfesorOnDirector);
@@ -345,15 +350,10 @@ class School implements ActionListener {
         System.out.println("Boton delete puchao");
       }
     });
-    String[] columnNameAdmin = {"Nombre - Matricula", "Maestro - Curso - Calificacion", "Fecha"};
-    Object[][] dataAdmin = {
-        {"Juanito - S1492384", "Pedro - Matematicas - 7", "12-01-2021"},
-        {"Juanito - S1492384", "Pedro - Matematicas - 7", "12-01-2021"},
-        {"Juanito - S1492384", "Pedro - Matematicas - 7", "12-01-2021"}
-    };
 
-    JTable tableAdmin = new JTable(dataAdmin, columnNameAdmin);
-    printDataAdmin(tableAdmin);
+    JTable tableAdmin = new JTable();
+    tableAdmin.setModel(new CRUDAdmin(myData.admins));
+
 
     JPanel JPanel_administrator = new JPanel();
     JPanel_administrator.add(jlabelNameStudentOnAdmin);
@@ -368,7 +368,6 @@ class School implements ActionListener {
     JPanel_administrator.add(jtexfieldScoreStudentOnAdmin);
     JPanel_administrator.add(jlabelDateStudentOnAdmin);
     JPanel_administrator.add(jtexfieldDateStudenOnAdmin);
-
     JPanel_administrator.add(btnAddStudentOnAdmin);
     JPanel_administrator.add(btnDeleteStudentOnAdmin);
 
@@ -405,70 +404,6 @@ class School implements ActionListener {
     if (commandString.equals("Opciones administrador")){
       JInternalFrame_administrator.setVisible(true);
     }
-  }
-
-  void printDataStudent(JTable tableStudent){
-    int numRows = tableStudent.getRowCount();
-    int numCols = tableStudent.getColumnCount();
-    TableModel modelStudent = tableStudent.getModel();
-
-    System.out.println("Valor de los datos");
-    for(int i = 0; i< numRows; i++){
-      System.out.println("| Row |" +i +":");
-      for(int j=0; j<numCols; j++){
-        System.out.print(" " +modelStudent.getValueAt(i, j));
-      }
-      System.out.println();
-    }
-    System.out.println("-------------------");
-  }
-
-  void printDataTeacher(JTable tableTeacher){
-    int numRows = tableTeacher.getRowCount();
-    int numCols = tableTeacher.getColumnCount();
-    TableModel modelStudent = tableTeacher.getModel();
-
-    System.out.println("Valor de los datos");
-    for(int i = 0; i< numRows; i++){
-      System.out.println("| Row |" +i +":");
-      for(int j=0; j<numCols; j++){
-        System.out.print(" " +modelStudent.getValueAt(i, j));
-      }
-      System.out.println();
-    }
-    System.out.println("-------------------");
-  }
-
-  void printDataDirector(JTable tableDirector){
-    int numRows = tableDirector.getRowCount();
-    int numCols = tableDirector.getColumnCount();
-    TableModel modelStudent = tableDirector.getModel();
-
-    System.out.println("Valor de los datos");
-    for(int i = 0; i< numRows; i++){
-      System.out.println("| Row |" +i +":");
-      for(int j=0; j<numCols; j++){
-        System.out.print(" " +modelStudent.getValueAt(i, j));
-      }
-      System.out.println();
-    }
-    System.out.println("-------------------");
-  }
-
-  void printDataAdmin(JTable tableAdmin){
-    int numRows = tableAdmin.getRowCount();
-    int numCols = tableAdmin.getColumnCount();
-    TableModel modelStudent = tableAdmin.getModel();
-
-    System.out.println("Valor de los datos");
-    for(int i = 0; i< numRows; i++){
-      System.out.println("| Row |" +i +":");
-      for(int j=0; j<numCols; j++){
-        System.out.print(" " +modelStudent.getValueAt(i, j));
-      }
-      System.out.println();
-    }
-    System.out.println("-------------------");
   }
 
   void makeMenuStudent(){

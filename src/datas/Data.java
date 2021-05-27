@@ -1,9 +1,6 @@
 package datas;
 
-import models.Course;
-import models.CourseTeacher;
-import models.Student;
-import models.Teacher;
+import models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +10,8 @@ public class Data {
   public List<Teacher> teachers = new ArrayList<>();
   public List<Course> courses = new ArrayList<>();
   public List<CourseTeacher> courseteachers = new ArrayList<>();
+  public List<Director> directors = new ArrayList<>();
+  public List<Admin> admins = new ArrayList<>();
 
   public Data(){
     Course course1 = new Course("Matematicas",8);
@@ -42,9 +41,24 @@ public class Data {
     students.add(student1);
     students.add(student2);
     students.add(student3);
+
+    Director director1 = new Director("Adal Ramones", "Director");
+    Director director2 = new Director("Juana Allende", "Director");
+    Director director3 = new Director("Lucia Minerva", "Director");
+    directors.add(director1);
+    directors.add(director2);
+    directors.add(director3);
+
+    Admin admin1 = new Admin("Luisa Lane", "Administrador");
+    Admin admin2 = new Admin("Roberto Garcia", "Administrador");
+    Admin admin3 = new Admin("Blue Marie", "Administrador");
+    admins.add(admin1);
+    admins.add(admin2);
+    admins.add(admin3);
   }
 
-  public static void main(String[] args) {
+
+  /*public static void main(String[] args) {
     Data data1 = new Data();
     Data data2 = new Data();
     Data data3 = new Data();
@@ -71,5 +85,5 @@ public class Data {
     for (int l = 0; l<data4.students.size(); l++){
       System.out.println(data4.students.get(l));
     }
-  }
+  }*/
 }
