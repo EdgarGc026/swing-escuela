@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.border.EmptyBorder;
@@ -27,16 +29,22 @@ public class FrameStudents extends JInternalFrame{
     Data myData = new Data();
     JLabel labelDNIStudent = new JLabel("Matricula");
     JTextField texfieldStudentDNI = new JTextField(10);
+
     JLabel labelNameStudent = new JLabel("Nombre");
     JTextField textfieldNameStudent = new JTextField(10);
+
     JLabel labelDateStudent = new JLabel("Fecha");
-    JTextField textfielDateStudent = new JTextField(10);
+    JTextField textfieldDateStudent = new JTextField(10);
+
     JLabel labelCourseStudent = new JLabel("Materia");
     JTextField textfieldCourseStudent = new JTextField(10);
+
     JLabel labelScoreStudent = new JLabel("Calificacion");
     JTextField textfieldScoreStudent = new JTextField(10);
+
     JLabel labelDNITeacherOnStudent = new JLabel("DNI");
     JTextField texfieldDNITeacherOnStudent = new JTextField(10);
+
     JLabel labelNameTeacherOnStudent = new JLabel("Profesor");
     JTextField textfieldNameTeacherOnStudent = new JTextField(10);
 
@@ -48,7 +56,8 @@ public class FrameStudents extends JInternalFrame{
       public void actionPerformed(ActionEvent e) {
         String dataTextfieldStudentDNI = texfieldStudentDNI.getText();
         String dataTextfieldNameStudent = textfieldNameStudent.getText();
-        String dateTexfieldDateStudent = textfielDateStudent.getText();
+        String dateTexfieldDateStudent = textfieldDateStudent.getText();
+
         String dataTextfieldCourseStudent = textfieldCourseStudent.getText();
         String dataTextfieldScoreStudent = textfieldScoreStudent.getText();
         String dataTextfieldNameTeacherStudent = textfieldNameTeacherOnStudent.getText();
@@ -75,6 +84,50 @@ public class FrameStudents extends JInternalFrame{
 
     JTable tableStudent = new JTable();
     tableStudent.setModel(new CRUDStudent(myData.students));
+    tableStudent.addMouseListener(new MouseListener() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        int indexRow = tableStudent.getSelectedRow();
+        String studentDNI = tableStudent.getValueAt(indexRow, 0).toString();
+        String namestudent = tableStudent.getValueAt(indexRow, 1).toString();
+        String datestudent = tableStudent.getValueAt(indexRow, 2).toString();
+
+        String coursestudent =  tableStudent.getValueAt(indexRow, 3).toString();
+        String scorestudent = tableStudent.getValueAt(indexRow, 4).toString();
+        String dniteacherstudent = tableStudent.getValueAt(indexRow, 5).toString();
+        String teacherstudent = tableStudent.getValueAt(indexRow,6).toString();
+
+        texfieldStudentDNI.setText(studentDNI);
+        textfieldNameStudent.setText(namestudent);
+        textfieldDateStudent.setText(datestudent);
+
+        textfieldScoreStudent.setText(String.valueOf(scorestudent));
+        textfieldCourseStudent.setText(coursestudent);
+        texfieldDNITeacherOnStudent.setText(dniteacherstudent);
+        textfieldNameTeacherOnStudent.setText(teacherstudent);
+
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+
+      }
+    });
 
     JScrollPane scrollPane_student = new JScrollPane(tableStudent);
     this.add(scrollPane_student);
@@ -82,18 +135,23 @@ public class FrameStudents extends JInternalFrame{
 
     JPanel_student.add(labelDNIStudent);
     JPanel_student.add(texfieldStudentDNI);
+
     JPanel_student.add(labelNameStudent);
     JPanel_student.add(textfieldNameStudent);
+
     JPanel_student.add(labelDateStudent);
-    JPanel_student.add(textfielDateStudent);
+    JPanel_student.add(textfieldDateStudent);
+
     JPanel_student.add(labelCourseStudent);
     JPanel_student.add(textfieldCourseStudent);
     JPanel_student.add(labelScoreStudent);
     JPanel_student.add(textfieldScoreStudent);
+
     JPanel_student.add(labelDNITeacherOnStudent);
     JPanel_student.add(texfieldDNITeacherOnStudent);
     JPanel_student.add(labelNameTeacherOnStudent);
     JPanel_student.add(textfieldNameTeacherOnStudent);
+
     JPanel_student.add(btnAddStudent);
     JPanel_student.add(btnDeleteStudent);
 

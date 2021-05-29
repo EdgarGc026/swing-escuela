@@ -2,14 +2,12 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import adapters.CRUDDirector;
 import datas.Data;
 
@@ -59,6 +57,36 @@ public class FrameDirect extends JInternalFrame{
 
     JTable tableDirector = new JTable();
     tableDirector.setModel(new CRUDDirector(myData.directors));
+    tableDirector.addMouseListener(new MouseListener() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        int indexRow = tableDirector.getSelectedRow();
+        String directorName = tableDirector.getValueAt(indexRow, 0).toString();
+        String directorJob = tableDirector.getValueAt(indexRow, 1).toString();
+        textfieldNameDirector.setText(directorName);
+        textfieldJobDirector.setText(directorJob);
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+
+      }
+    });
 
     JPanel JPanel_director = new JPanel();
     JPanel_director.add(labelNameDirector);

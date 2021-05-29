@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.*;
@@ -54,6 +56,36 @@ public class FrameAdmin extends JInternalFrame{
 
     JTable tableAdmin = new JTable();
     tableAdmin.setModel(new CRUDAdmin(myData.admins));
+    tableAdmin.addMouseListener(new MouseListener() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        int indexRow = tableAdmin.getSelectedRow();
+        String adminName = tableAdmin.getValueAt(indexRow, 0).toString();
+        String adminJob = tableAdmin.getValueAt(indexRow,1).toString();
+        texfieldNameAdmin.setText(adminName);
+        texfieldJobAdmin.setText(adminJob);
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+
+      }
+    });
 
     JPanel JPanel_administrator = new JPanel();
     JPanel_administrator.add(labelNameAdmin);
