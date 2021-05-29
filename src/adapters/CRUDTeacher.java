@@ -38,4 +38,11 @@ public class CRUDTeacher extends AbstractTableModel {
         return null;
     }
   }
+
+  public boolean isCellEditable(int rowIndex, int columnIndex){
+    if(columnIndex > 0){
+      return true;
+    }
+    return false;
+  }
 }
