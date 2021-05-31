@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.*;
@@ -53,6 +55,36 @@ public class FrameTeachers extends JInternalFrame{
 
     JTable tableTeacher = new JTable();
     tableTeacher.setModel(new CRUDTeacher(myData.teachers));
+    tableTeacher.addMouseListener(new MouseListener() {
+      @Override
+      public void mouseClicked(MouseEvent e) {
+        int indexRow = tableTeacher.getSelectedRow();
+        String teacherName = tableTeacher.getValueAt(indexRow, 0).toString();
+        String teacherDNI = tableTeacher.getValueAt(indexRow, 1).toString();
+        textFieldNameTeacher.setText(teacherName);
+        textFieldDNITeacher.setText(teacherDNI);
+      }
+
+      @Override
+      public void mousePressed(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseReleased(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseEntered(MouseEvent e) {
+
+      }
+
+      @Override
+      public void mouseExited(MouseEvent e) {
+
+      }
+    });
 
     JScrollPane scrollPane_teacher = new JScrollPane(tableTeacher);
     JPanel JPanel_teacher = new JPanel();

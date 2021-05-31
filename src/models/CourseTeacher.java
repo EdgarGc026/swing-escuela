@@ -26,6 +26,7 @@ public class CourseTeacher {
   }
 
   public String toStringCourseTeacher() {
-    return this.course + "," + this.teacher;
+    System.out.println(this.course.toStringCourse() + "," + this.teacher.toStringTeacher());
+    return this.course.toStringCourse() + "," + this.teacher.toStringTeacher();
   }
 }
