@@ -13,12 +13,9 @@ public class TextFile {
   	
 	public TextFile(String filename){
 		this.filename = "connects/" +filename;
+		this.tempFileName = "connects/temp" +filename;
 	}
 
-	public TextFile(String filename,String tempFileName){
-		this.filename = "connects/" +filename;
-		this.tempFileName = "connects/" +tempFileName;
-	}
 
 	public boolean insertOnFileText(String text){
 		try {

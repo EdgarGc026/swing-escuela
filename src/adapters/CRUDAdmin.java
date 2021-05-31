@@ -1,17 +1,19 @@
 package adapters;
 
 import models.Admin;
-
+import connects.TextFile;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
+import java.io.File;
 
 public class CRUDAdmin extends AbstractTableModel {
-  String [] columnAdmins = {"Nombre", "Puesto"};
+  String [] columnAdmins = {"id","Nombre", "Puesto"};
   ArrayList<Admin> list;
 
-  public CRUDAdmin(List<Admin> admins){
-   list = new ArrayList<Admin>(admins);
+  public CRUDAdmin(){
+   list = this.obtenerAdminsTabla();
   }
 
   @Override
@@ -32,11 +34,55 @@ public class CRUDAdmin extends AbstractTableModel {
   public Object getValueAt(int rowIndex, int columnIndex) {
     switch (columnIndex){
       case 0:
-        return this.list.get(rowIndex).getName();
+        return this.list.get(rowIndex).getId();
       case 1:
+        return this.list.get(rowIndex).getName();
+      case 2:
         return this.list.get(rowIndex).getJob();
       default:
         return null;
     }
   }
+
+// se agrega el objeto utilizando toSTring del objeto
+  public boolean agregarAdmin(String adminText){
+    	boolean guardado = false;
+	TextFile textFile = new TextFile("admin.txt");
+	guardado = textFile.insertOnFileText(adminText);
+	return guardado;
+  }
+
+  public boolean actualizarAdmin(String oldText, String newText){
+    	boolean guardado = false;
+	TextFile textFile = new TextFile("admin.txt");
+	guardado = textFile.updateLineFileText(oldText, newText);
+	return guardado;
+  }
+
+  public boolean eliminarAdmin(String adminText){
+    	boolean guardado = false;
+	TextFile textFile = new TextFile("admin.txt");
+	guardado = textFile.deleteLineFileText(adminText);
+	return guardado;
+  }
+
+
+  public ArrayList<Admin> obtenerAdminsTabla(){
+    	File tempFile = new File("connects/admin.txt");
+        ArrayList<Admin> listaFinal = new ArrayList<Admin>();
+	if(tempFile.exists()){
+	TextFile textFile = new TextFile("admin.txt");
+	String[] segundoSplit = null;
+	String directoresString = textFile.readFileText();
+	String[] primerSplit = directoresString.split(";");
+		for (String string : primerSplit) {
+	  	    segundoSplit = string.split(",");
+	    	    System.out.println(Arrays.toString(segundoSplit));
+		    listaFinal.add(new Admin(segundoSplit[0],segundoSplit[1],segundoSplit[2]));
+	  	}
+	}
+	return listaFinal;
+  }
+
+
 }

@@ -42,16 +42,16 @@ public class Data {
     students.add(student2);
     students.add(student3);
 
-    Director director1 = new Director("Adal Ramones", "Director");
-    Director director2 = new Director("Juana Allende", "Director");
-    Director director3 = new Director("Lucia Minerva", "Director");
+    Director director1 = new Director("1","Adal Ramones", "Director");
+    Director director2 = new Director("1","Juana Allende", "Director");
+    Director director3 = new Director("1","Lucia Minerva", "Director");
     directors.add(director1);
     directors.add(director2);
     directors.add(director3);
 
-    Admin admin1 = new Admin("Luisa Lane", "Administrador");
-    Admin admin2 = new Admin("Roberto Garcia", "Administrador");
-    Admin admin3 = new Admin("Blue Marie", "Administrador");
+    Admin admin1 = new Admin("1","Luisa Lane", "Administrador");
+    Admin admin2 = new Admin("2","Roberto Garcia", "Administrador");
+    Admin admin3 = new Admin("3","Blue Marie", "Administrador");
     admins.add(admin1);
     admins.add(admin2);
     admins.add(admin3);

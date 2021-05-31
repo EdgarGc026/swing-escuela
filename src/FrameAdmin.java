@@ -1,12 +1,10 @@
 import java.awt.BorderLayout;
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import adapters.CRUDAdmin;
-import datas.Data;
 
 public class FrameAdmin extends JInternalFrame{
 
@@ -23,7 +21,6 @@ public class FrameAdmin extends JInternalFrame{
     }
 
   public void confInterface(){
-    Data myData = new Data();
     JLabel labelNameAdmin = new JLabel("Nombre");
     JTextField texfieldNameAdmin = new JTextField(10);
 
@@ -53,7 +50,7 @@ public class FrameAdmin extends JInternalFrame{
     });
 
     JTable tableAdmin = new JTable();
-    tableAdmin.setModel(new CRUDAdmin(myData.admins));
+    tableAdmin.setModel(new CRUDAdmin());
 
     JPanel JPanel_administrator = new JPanel();
     JPanel_administrator.add(labelNameAdmin);

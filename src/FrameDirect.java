@@ -1,17 +1,13 @@
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import adapters.CRUDDirector;
 import datas.Data;
+import models.Director;
 
 public class FrameDirect extends JInternalFrame{
 
@@ -27,7 +23,6 @@ public class FrameDirect extends JInternalFrame{
     }
 
   public void confInterface(){
-    Data myData = new Data();
     //Agregando los inputs y labels
     JLabel labelNameDirector = new JLabel("Nombre");
     JTextField textfieldNameDirector = new JTextField(10);
@@ -58,7 +53,7 @@ public class FrameDirect extends JInternalFrame{
     });
 
     JTable tableDirector = new JTable();
-    tableDirector.setModel(new CRUDDirector(myData.directors));
+    tableDirector.setModel(new CRUDDirector());
 
     JPanel JPanel_director = new JPanel();
     JPanel_director.add(labelNameDirector);
