@@ -1,6 +1,5 @@
 package adapters;
 
-
 import java.util.Arrays;
 import models.Director;
 import connects.TextFile;

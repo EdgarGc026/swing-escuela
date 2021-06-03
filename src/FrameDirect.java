@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +14,9 @@ public class FrameDirect extends JInternalFrame{
   private JTextField textfieldIdDirector; 
   private JTextField textfieldNameDirector; 
   private JTextField textfieldJobDirector; 
+  private int filaSelect;
+  private Director directorSel = new Director();
+
   public FrameDirect(String arg0,boolean arg1,boolean arg2,boolean arg3,boolean arg4) {
     //Creamos el Frame donde estaremos mostrando el crude
     
@@ -58,12 +60,19 @@ public class FrameDirect extends JInternalFrame{
 	}
       }
     });
+
     JButton btnDeleteDirector = new JButton("Eliminar");
     btnDeleteDirector.setBounds(5,30,80,30);
     btnDeleteDirector.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        System.out.println("btn eliminar del director al 100");
+	if(directorSel.getName().length() > 0){
+		if(crudDirector.eliminarDirector(directorSel.toStringDirector())){
+		  crudDirector.removeRow(filaSelect);
+		  clearTextField();
+		}
+
+	}
       }
     });
 
@@ -73,10 +82,19 @@ public class FrameDirect extends JInternalFrame{
       @Override
       public void mouseClicked(MouseEvent e) {
         int indexRow = tableDirector.getSelectedRow();
-        String directorName = tableDirector.getValueAt(indexRow, 0).toString();
-        String directorJob = tableDirector.getValueAt(indexRow, 1).toString();
+	filaSelect = tableDirector.getSelectedRow();
+        String directorID = tableDirector.getValueAt(indexRow, 0).toString();
+        String directorName = tableDirector.getValueAt(indexRow, 1).toString();
+        String directorJob = tableDirector.getValueAt(indexRow, 2).toString();
+
+        textfieldIdDirector.setText(directorID);
         textfieldNameDirector.setText(directorName);
         textfieldJobDirector.setText(directorJob);
+
+	directorSel.setPersonalNum(directorID);
+	directorSel.setName(directorName);
+	directorSel.setJob(directorJob);
+
       }
 
       @Override

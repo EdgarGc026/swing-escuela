@@ -10,11 +10,14 @@ import adapters.CRUDAdmin;
 import models.Admin;
 
 public class FrameAdmin extends JInternalFrame{
-   JTable tableAdmin = new JTable();
-   CRUDAdmin crudAdmin = new CRUDAdmin();
+
+   private JTable tableAdmin = new JTable();
+   private CRUDAdmin crudAdmin = new CRUDAdmin();
    private JTextField texfieldIdAdmin;
    private JTextField texfieldNameAdmin;
    private JTextField texfieldJobAdmin;;
+   private int filaSelect;
+   private Admin adminSel = new Admin();
 
   public FrameAdmin(String arg0,boolean arg1,boolean arg2,boolean arg3,boolean arg4) {
     //Creamos el Frame donde estaremos mostrando el crude
@@ -63,7 +66,12 @@ public class FrameAdmin extends JInternalFrame{
     btnDeleteStudentOnAdmin.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        System.out.println("Boton delete puchao");
+	if (adminSel.getName().length() > 0) {
+		if (crudAdmin.eliminarAdmin(adminSel.toStringAdmin())) {
+			crudAdmin.removeRow(filaSelect);	
+			clearTextField();
+		}	
+	}
       }
     });
 
@@ -72,30 +80,36 @@ public class FrameAdmin extends JInternalFrame{
       @Override
       public void mouseClicked(MouseEvent e) {
         int indexRow = tableAdmin.getSelectedRow();
-        String adminName = tableAdmin.getValueAt(indexRow, 0).toString();
-        String adminJob = tableAdmin.getValueAt(indexRow,1).toString();
+	filaSelect = tableAdmin.getSelectedRow();
+
+        String adminID = tableAdmin.getValueAt(indexRow, 0).toString();
+        String adminName = tableAdmin.getValueAt(indexRow, 1).toString();
+        String adminJob = tableAdmin.getValueAt(indexRow,2).toString();
+
+        texfieldIdAdmin.setText(adminID);
         texfieldNameAdmin.setText(adminName);
         texfieldJobAdmin.setText(adminJob);
+
+	adminSel.setId(adminID);
+	adminSel.setName(adminName);
+	adminSel.setJob(adminJob);
+
       }
 
       @Override
       public void mousePressed(MouseEvent e) {
-
       }
 
       @Override
       public void mouseReleased(MouseEvent e) {
-
       }
 
       @Override
       public void mouseEntered(MouseEvent e) {
-
       }
 
       @Override
       public void mouseExited(MouseEvent e) {
-
       }
     });
 

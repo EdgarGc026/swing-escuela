@@ -8,14 +8,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import adapters.CRUDTeacher;
-import javafx.scene.control.TextField;
 import models.Teacher;
 
 public class FrameTeachers extends JInternalFrame{
-  JTable tableTeacher = new JTable();
-  CRUDTeacher crudTeacher = new CRUDTeacher();
+  private JTable tableTeacher = new JTable();
+  private CRUDTeacher crudTeacher = new CRUDTeacher();
   private JTextField textFieldDNITeacher;
   private JTextField textFieldNameTeacher;
+  private int filaSelect;
+  private Teacher teacherSel = new Teacher();
+
   public FrameTeachers(String arg0,boolean arg1,boolean arg2,boolean arg3,boolean arg4) {
     //Creamos el Frame donde estaremos mostrando el crude
     super(arg0,arg1,arg2,arg3,arg4);
@@ -61,7 +63,12 @@ public class FrameTeachers extends JInternalFrame{
     btnDeleteTeacher.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        System.out.println("Delete Maestro al pedo, parce");
+	if (teacherSel.getName().length() > 0) {
+		if (crudTeacher.eliminarTeacher(teacherSel.toStringTeacher())) {
+			crudTeacher.removeRow(filaSelect);	
+			clearTextField();
+		}	
+	}
       }
     });
 
@@ -70,10 +77,16 @@ public class FrameTeachers extends JInternalFrame{
       @Override
       public void mouseClicked(MouseEvent e) {
         int indexRow = tableTeacher.getSelectedRow();
-        String teacherName = tableTeacher.getValueAt(indexRow, 0).toString();
-        String teacherDNI = tableTeacher.getValueAt(indexRow, 1).toString();
-        textFieldNameTeacher.setText(teacherName);
+	filaSelect = tableTeacher.getSelectedRow();
+
+        String teacherDNI = tableTeacher.getValueAt(indexRow, 0).toString();
+        String teacherName = tableTeacher.getValueAt(indexRow, 1).toString();
+
         textFieldDNITeacher.setText(teacherDNI);
+        textFieldNameTeacher.setText(teacherName);
+
+	teacherSel.setPersonaNumber(teacherDNI);
+	teacherSel.setName(teacherName);
       }
 
       @Override
@@ -99,10 +112,10 @@ public class FrameTeachers extends JInternalFrame{
 
     JScrollPane scrollPane_teacher = new JScrollPane(tableTeacher);
     JPanel JPanel_teacher = new JPanel();
-    JPanel_teacher.add(labelNameTeacher);
-    JPanel_teacher.add(textFieldNameTeacher);
     JPanel_teacher.add(labelDNITeacher);
     JPanel_teacher.add(textFieldDNITeacher);
+    JPanel_teacher.add(labelNameTeacher);
+    JPanel_teacher.add(textFieldNameTeacher);
     JPanel_teacher.add(btnAddTeacher);
     JPanel_teacher.add(btnDeleteTeacher);
 

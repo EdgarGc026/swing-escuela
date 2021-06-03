@@ -49,11 +49,33 @@ public class CRUDTeacher extends AbstractTableModel {
     return false;
   }
 
-  public void add(Teacher teacher) {
+@Override
+  public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+      Teacher teacher = list.get(rowIndex);
+      switch (columnIndex) {
+	  case 0:
+	      if (aValue instanceof String) {
+		  teacher.setPersonaNumber(aValue.toString());
+	      }
+	      break;
+	  case 1:
+	      if (aValue instanceof String) {
+		  teacher.setName(aValue.toString());
+	      }
+	      break;
+      }
+      fireTableCellUpdated(rowIndex, columnIndex);
+  }
 
+  public void add(Teacher teacher) {
             this.list.add(teacher);
             fireTableRowsInserted(list.size() - 1, list.size() - 1);
-
+  }
+  // eliminar el  director pero solo en la tabla. no en el txt
+  public void removeRow(int row) {
+    // remove a row from your internal data structure
+    list.remove(row);
+    fireTableRowsDeleted(row, row);
   }
 
 // se agrega el objeto utilizando toSTring del objeto

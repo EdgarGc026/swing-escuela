@@ -9,6 +9,9 @@ public class Teacher {
     this.name = name;
   }
 
+  public Teacher() {
+  }
+
   public String getPersonaNumber() {
     return personaNumber;
   }

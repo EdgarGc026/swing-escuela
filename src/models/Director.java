@@ -11,6 +11,10 @@ public class Director {
     this.personalNum = personalNum;
   }
 
+  public Director() {
+  }
+
+
   public String getName() {
     return name;
   }

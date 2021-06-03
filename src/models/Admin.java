@@ -11,6 +11,9 @@ public class Admin {
     this.job = job;
   }
 
+  public Admin() {
+  }
+
   public String getName() {
     return name;
   }
@@ -38,4 +41,5 @@ public class Admin {
   public String toStringAdmin() {
     return this.id + "," +this.name + "," + this.job;
   }
+
 }
