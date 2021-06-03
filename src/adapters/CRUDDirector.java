@@ -43,6 +43,42 @@ public class CRUDDirector extends AbstractTableModel {
         return null;
     }
   }
+  // actualiza el director pero solo en la tabla. no en el txt
+  @Override
+  public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+      Director director = list.get(rowIndex);
+      switch (columnIndex) {
+	  case 0:
+	      if (aValue instanceof String) {
+		  director.setPersonalNum(aValue.toString());
+	      }
+	      break;
+	  case 1:
+	      if (aValue instanceof String) {
+		  director.setName(aValue.toString());
+	      }
+	      break;
+	 case 2:
+	      if (aValue instanceof String) {
+		  director.setJob(aValue.toString());
+	      }
+	      break;
+      }
+      fireTableCellUpdated(rowIndex, columnIndex);
+  }
+  // Agrega director pero solo en la tabla. no en el txt
+ public void add(Director director) {
+            this.list.add(director);
+            fireTableRowsInserted(list.size() - 1, list.size() - 1);
+
+        }
+
+  // eliminar el  director pero solo en la tabla. no en el txt
+public void removeRow(int row) {
+    // remove a row from your internal data structure
+    list.remove(row);
+    fireTableRowsDeleted(row, row);
+}
  // se agrega el objeto utilizando toSTring del objeto
   public boolean agregarDirector(String directorText){
     	boolean guardado = false;
@@ -73,12 +109,14 @@ public class CRUDDirector extends AbstractTableModel {
 	TextFile textFile = new TextFile("director.txt");
 	String[] segundoSplit = null;
 	String directoresString = textFile.readFileText();
-	String[] primerSplit = directoresString.split(";");
-		for (String string : primerSplit) {
-	  	segundoSplit = string.split(",");
-		System.out.println(Arrays.toString(segundoSplit));
-		listaFinal.add(new Director(segundoSplit[0],segundoSplit[1],segundoSplit[2]));
-	  	}
+	if (directoresString.length()>0) {
+	  	 String[] primerSplit = directoresString.split(";");
+		  for (String string : primerSplit) {
+		    segundoSplit = string.split(",");
+		    System.out.println(Arrays.toString(segundoSplit));
+		    listaFinal.add(new Director(segundoSplit[0],segundoSplit[1],segundoSplit[2]));
+		  }
+	}
 	}
 	return listaFinal;
   }

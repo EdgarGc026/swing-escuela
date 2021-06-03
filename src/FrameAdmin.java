@@ -7,9 +7,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import adapters.CRUDAdmin;
+import models.Admin;
 
 public class FrameAdmin extends JInternalFrame{
-
+   JTable tableAdmin = new JTable();
+   CRUDAdmin crudAdmin = new CRUDAdmin();
+   private JTextField texfieldIdAdmin;
+   private JTextField texfieldNameAdmin;
+   private JTextField texfieldJobAdmin;;
 
   public FrameAdmin(String arg0,boolean arg1,boolean arg2,boolean arg3,boolean arg4) {
     //Creamos el Frame donde estaremos mostrando el crude
@@ -23,11 +28,14 @@ public class FrameAdmin extends JInternalFrame{
     }
 
   public void confInterface(){
+    JLabel labelIdAdmin = new JLabel("ID");
+    texfieldIdAdmin = new JTextField(10);
+
     JLabel labelNameAdmin = new JLabel("Nombre");
-    JTextField texfieldNameAdmin = new JTextField(10);
+     texfieldNameAdmin = new JTextField(10);
 
     JLabel labelJobAdmin = new JLabel("Puesto");
-    JTextField texfieldJobAdmin = new JTextField(10);
+    texfieldJobAdmin = new JTextField(10);
 
     JButton btnAddStudentOnAdmin = new JButton("Agregar");
     btnAddStudentOnAdmin.setBounds(100,150,100,30);
@@ -36,9 +44,17 @@ public class FrameAdmin extends JInternalFrame{
       public void actionPerformed(ActionEvent e) {
         String dataNameAdmin = texfieldNameAdmin.getText();
         String dataJobAdmin = texfieldJobAdmin.getText();
-
-        System.out.println("Obteniendo datos de: " +dataNameAdmin);
-        System.out.println("Obteniendo datos de: " +dataJobAdmin);
+        String dataIdAdmin = texfieldIdAdmin.getText();
+	if (dataNameAdmin != null && dataJobAdmin != null && dataIdAdmin != null) {
+		if (dataNameAdmin.length() > 0 && dataJobAdmin.length() > 0 && dataIdAdmin.length() > 0) {
+			Admin admin = new Admin(dataIdAdmin.trim(),dataNameAdmin.trim(), dataJobAdmin.trim());
+			crudAdmin.add(admin);
+			System.out.println(admin.toStringAdmin());
+			if(crudAdmin.agregarAdmin(admin.toStringAdmin())){
+				clearTextField();
+			}
+		}	
+	}
       }
     });
 
@@ -51,8 +67,7 @@ public class FrameAdmin extends JInternalFrame{
       }
     });
 
-    JTable tableAdmin = new JTable();
-    tableAdmin.setModel(new CRUDAdmin());
+    tableAdmin.setModel(crudAdmin);
     tableAdmin.addMouseListener(new MouseListener() {
       @Override
       public void mouseClicked(MouseEvent e) {
@@ -85,6 +100,8 @@ public class FrameAdmin extends JInternalFrame{
     });
 
     JPanel JPanel_administrator = new JPanel();
+    JPanel_administrator.add(labelIdAdmin);
+    JPanel_administrator.add(texfieldIdAdmin);
     JPanel_administrator.add(labelNameAdmin);
     JPanel_administrator.add(texfieldNameAdmin);
     JPanel_administrator.add(labelJobAdmin);
@@ -97,5 +114,11 @@ public class FrameAdmin extends JInternalFrame{
     this.add(JPanel_administrator, BorderLayout.PAGE_END);
 
   }
- 
+
+   public void clearTextField(){
+	 texfieldIdAdmin.setText("");
+	 texfieldNameAdmin.setText("");
+	 texfieldJobAdmin.setText("");
+  }
+
 }

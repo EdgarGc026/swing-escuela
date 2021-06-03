@@ -36,6 +36,6 @@ public class Admin {
   }
 
   public String toStringAdmin() {
-    return this.name + "," +this.name;
+    return this.id + "," +this.name + "," + this.job;
   }
 }

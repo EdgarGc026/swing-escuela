@@ -8,10 +8,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import adapters.CRUDTeacher;
-import datas.Data;
+import javafx.scene.control.TextField;
+import models.Teacher;
 
 public class FrameTeachers extends JInternalFrame{
-
+  JTable tableTeacher = new JTable();
+  CRUDTeacher crudTeacher = new CRUDTeacher();
+  private JTextField textFieldDNITeacher;
+  private JTextField textFieldNameTeacher;
   public FrameTeachers(String arg0,boolean arg1,boolean arg2,boolean arg3,boolean arg4) {
     //Creamos el Frame donde estaremos mostrando el crude
     super(arg0,arg1,arg2,arg3,arg4);
@@ -24,23 +28,31 @@ public class FrameTeachers extends JInternalFrame{
     }
 
   public void confInterface(){
-    Data myData = new Data();
     JLabel labelNameTeacher = new JLabel("Nombre");
-    JTextField textFieldNameTeacher = new JTextField(10);
+     textFieldNameTeacher = new JTextField(10);
 
     JLabel labelDNITeacher = new JLabel("DNI");
-    JTextField textFieldDNITeacher = new JTextField(10);
+     textFieldDNITeacher = new JTextField(10);
 
     JButton btnAddTeacher = new JButton("Agregar");
     btnAddTeacher.setBounds(100,150,100,30);
+    // Evento de agrager maestro
     btnAddTeacher.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         String dataNameTeacher = textFieldNameTeacher.getText();
         String dataDNITeacher = textFieldDNITeacher.getText();
+	if (dataDNITeacher != null && dataNameTeacher != null ) {
+	  if (dataDNITeacher.length() > 0 && dataNameTeacher.length() > 0 ) {
+			Teacher teacher = new Teacher(dataDNITeacher.trim(),dataNameTeacher.trim());
+			crudTeacher.add(teacher);
+			System.out.println(teacher.toStringTeacher());
+			if(crudTeacher.agregarTeacher(teacher.toStringTeacher())){
+				clearTextField();
+			}
+		}	
+	}
 
-        System.out.println("Obtenido de:" +dataNameTeacher);
-        System.out.println("Obtenido de:" +dataDNITeacher);
       }
     });
 
@@ -53,8 +65,7 @@ public class FrameTeachers extends JInternalFrame{
       }
     });
 
-    JTable tableTeacher = new JTable();
-    tableTeacher.setModel(new CRUDTeacher(myData.teachers));
+    tableTeacher.setModel(crudTeacher);
     tableTeacher.addMouseListener(new MouseListener() {
       @Override
       public void mouseClicked(MouseEvent e) {
@@ -98,5 +109,8 @@ public class FrameTeachers extends JInternalFrame{
     this.add(scrollPane_teacher, BorderLayout.CENTER);
     this.add(JPanel_teacher, BorderLayout.PAGE_END);
   }
- 
+   public void clearTextField(){
+	 textFieldDNITeacher.setText("");
+	 textFieldNameTeacher.setText("");
+  }
 }

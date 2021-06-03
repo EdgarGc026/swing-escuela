@@ -44,6 +44,13 @@ public class CRUDAdmin extends AbstractTableModel {
     }
   }
 
+  public void add(Admin admin) {
+
+            this.list.add(admin);
+            fireTableRowsInserted(list.size() - 1, list.size() - 1);
+
+   }
+
 // se agrega el objeto utilizando toSTring del objeto
   public boolean agregarAdmin(String adminText){
     	boolean guardado = false;
@@ -73,13 +80,15 @@ public class CRUDAdmin extends AbstractTableModel {
 	if(tempFile.exists()){
 	TextFile textFile = new TextFile("admin.txt");
 	String[] segundoSplit = null;
-	String directoresString = textFile.readFileText();
-	String[] primerSplit = directoresString.split(";");
-		for (String string : primerSplit) {
-	  	    segundoSplit = string.split(",");
-	    	    System.out.println(Arrays.toString(segundoSplit));
-		    listaFinal.add(new Admin(segundoSplit[0],segundoSplit[1],segundoSplit[2]));
-	  	}
+	String adminsString = textFile.readFileText();
+	  if(adminsString.length() > 0){
+	  String[] primerSplit = adminsString.split(";");
+		  for (String string : primerSplit) {
+		      segundoSplit = string.split(",");
+		      System.out.println(Arrays.toString(segundoSplit));
+		      listaFinal.add(new Admin(segundoSplit[0],segundoSplit[1],segundoSplit[2]));
+		  }
+	  }
 	}
 	return listaFinal;
   }

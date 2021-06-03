@@ -10,9 +10,14 @@ import adapters.CRUDDirector;
 import models.Director;
 
 public class FrameDirect extends JInternalFrame{
-
+  private JTable tableDirector = new JTable();
+  private CRUDDirector crudDirector = new CRUDDirector();
+  private JTextField textfieldIdDirector; 
+  private JTextField textfieldNameDirector; 
+  private JTextField textfieldJobDirector; 
   public FrameDirect(String arg0,boolean arg1,boolean arg2,boolean arg3,boolean arg4) {
     //Creamos el Frame donde estaremos mostrando el crude
+    
     super(arg0,arg1,arg2,arg3,arg4);
     this.setSize(730,500);
     this.setVisible(false);
@@ -25,22 +30,32 @@ public class FrameDirect extends JInternalFrame{
   public void confInterface(){
     //Agregando los inputs y labels
     JLabel labelNameDirector = new JLabel("Nombre");
-    JTextField textfieldNameDirector = new JTextField(10);
+    textfieldNameDirector = new JTextField(10);
     JLabel labelJobDirector = new JLabel("Puesto");
-    JTextField textfieldJobDirector = new JTextField(10);
+    textfieldJobDirector = new JTextField(10);
+   JLabel labelIdDirector = new JLabel("ID");
+    textfieldIdDirector = new JTextField(10);
 
     //Agregando los botones
     JButton btnAddDirector = new JButton("Agregar");
     btnAddDirector.setBounds(5,30,80,30);
+    // Evento para agregar directores
     btnAddDirector.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        System.out.println("Boton agregar del director al toque mi rey");
-        String dataTextfieldNameDirector = textfieldNameDirector.getText();
-        String dataTextfieldJobDirector = textfieldJobDirector.getText();
-
-        System.out.println("Obtenido del: " +dataTextfieldNameDirector);
-        System.out.println("Obtenido del: " +dataTextfieldJobDirector);
+        String dataNameDirect = textfieldNameDirector.getText();
+        String dataJobDirect = textfieldJobDirector.getText();
+	String dataIdDirector = textfieldIdDirector.getText();
+	if (dataNameDirect != null && dataJobDirect != null && dataIdDirector != null) {
+	  if (dataNameDirect.length() > 0 && dataJobDirect.length() > 0 && dataIdDirector.length() > 0) {
+			Director director = new Director(dataIdDirector.trim(),dataNameDirect.trim(), dataJobDirect.trim());
+			crudDirector.add(director);
+			System.out.println(director.toStringDirector());
+			if(crudDirector.agregarDirector(director.toStringDirector())){
+				clearTextField();
+			}
+		}	
+	}
       }
     });
     JButton btnDeleteDirector = new JButton("Eliminar");
@@ -52,8 +67,8 @@ public class FrameDirect extends JInternalFrame{
       }
     });
 
-    JTable tableDirector = new JTable();
-    tableDirector.setModel(new CRUDDirector());
+    tableDirector.setModel(crudDirector);
+    // Evento para seleccionar directores
     tableDirector.addMouseListener(new MouseListener() {
       @Override
       public void mouseClicked(MouseEvent e) {
@@ -86,6 +101,8 @@ public class FrameDirect extends JInternalFrame{
     });
 
     JPanel JPanel_director = new JPanel();
+    JPanel_director.add(labelIdDirector);
+    JPanel_director.add(textfieldIdDirector);
     JPanel_director.add(labelNameDirector);
     JPanel_director.add(textfieldNameDirector);
     JPanel_director.add(labelJobDirector);
@@ -99,4 +116,9 @@ public class FrameDirect extends JInternalFrame{
 
   }
  
+  public void clearTextField(){
+	 textfieldNameDirector.setText("");
+	 textfieldJobDirector.setText("");
+	 textfieldIdDirector.setText("");
+  }
 }
