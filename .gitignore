@@ -1,0 +1,5 @@
+# Compile class files 
+*.class
+
+# Evitar archivos de DS_STORE
+*.DS_STORE
