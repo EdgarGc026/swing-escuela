@@ -2,18 +2,23 @@ import java.awt.BorderLayout;
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import adapters.CRUDStudent;
+import models.Student;
 
-import datas.Data;
 public class FrameStudents extends JInternalFrame{
-
-
+    private JTable tableStudent = new JTable();
+    private CRUDStudent crudStudent = new CRUDStudent();
+    private Student studentSel = new Student();
+    private JTextField texfieldStudentDNI; 
+    private JTextField textfieldNameStudent; 
+    private JTextField textfieldDateStudent; 
+    private JTextField textfieldCourseStudent; 
+    private int filaSelect;
+    
   public FrameStudents(String arg0,boolean arg1,boolean arg2,boolean arg3,boolean arg4) {
     //Creamos el Frame donde estaremos mostrando el crude
     super(arg0,arg1,arg2,arg3,arg4);
@@ -26,27 +31,18 @@ public class FrameStudents extends JInternalFrame{
     }
 
   public void confInterface(){
-    Data myData = new Data();
+
     JLabel labelDNIStudent = new JLabel("Matricula");
-    JTextField texfieldStudentDNI = new JTextField(10);
+    texfieldStudentDNI = new JTextField(10);
 
     JLabel labelNameStudent = new JLabel("Nombre");
-    JTextField textfieldNameStudent = new JTextField(10);
+    textfieldNameStudent = new JTextField(10);
 
     JLabel labelDateStudent = new JLabel("Fecha");
-    JTextField textfieldDateStudent = new JTextField(10);
+    textfieldDateStudent = new JTextField(10);
 
-    JLabel labelCourseStudent = new JLabel("Materia");
-    JTextField textfieldCourseStudent = new JTextField(10);
-
-    JLabel labelScoreStudent = new JLabel("Calificacion");
-    JTextField textfieldScoreStudent = new JTextField(10);
-
-    JLabel labelDNITeacherOnStudent = new JLabel("DNI");
-    JTextField texfieldDNITeacherOnStudent = new JTextField(10);
-
-    JLabel labelNameTeacherOnStudent = new JLabel("Profesor");
-    JTextField textfieldNameTeacherOnStudent = new JTextField(10);
+    JLabel labelCourseStudent = new JLabel("Id curso maestro");
+    textfieldCourseStudent = new JTextField(10);
 
     //Agregando los botones
     JButton btnAddStudent = new JButton("Agregar");
@@ -54,22 +50,21 @@ public class FrameStudents extends JInternalFrame{
     btnAddStudent.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+
         String dataTextfieldStudentDNI = texfieldStudentDNI.getText();
         String dataTextfieldNameStudent = textfieldNameStudent.getText();
         String dateTexfieldDateStudent = textfieldDateStudent.getText();
-
         String dataTextfieldCourseStudent = textfieldCourseStudent.getText();
-        String dataTextfieldScoreStudent = textfieldScoreStudent.getText();
-        String dataTextfieldNameTeacherStudent = textfieldNameTeacherOnStudent.getText();
-        String dataTexfieldDNITeacherStudent = texfieldDNITeacherOnStudent.getText();
-
-        System.out.println("Obtenemos los datos de:" + dataTextfieldStudentDNI);
-        System.out.println("Obtenemos los datos de:" + dataTextfieldNameStudent);
-        System.out.println("Obtenemos los datos de:" + dateTexfieldDateStudent);
-        System.out.println("Obtenemos los datos de:" + dataTextfieldCourseStudent);
-        System.out.println("Obtenemos los datos de:" + dataTextfieldScoreStudent);
-        System.out.println("Obtenemos los datos de:" + dataTextfieldNameTeacherStudent);
-        System.out.println("Obtenemos los datos de:" + dataTexfieldDNITeacherStudent);
+	if (dataTextfieldStudentDNI != null && dataTextfieldNameStudent != null && dateTexfieldDateStudent != null && dataTextfieldCourseStudent != null) {
+	  if (dataTextfieldStudentDNI.length() > 0 && dataTextfieldNameStudent.length() > 0 && dateTexfieldDateStudent.length() > 0 && dataTextfieldCourseStudent.length() > 0) {
+			Student student = new Student(dataTextfieldStudentDNI.trim(),dataTextfieldNameStudent.trim(), dateTexfieldDateStudent.trim(), dataTextfieldCourseStudent.trim());
+			crudStudent.add(student);
+			System.out.println(student.toStringStudent());
+			if(crudStudent.agregarStudent(student.toStringStudent())){
+				clearTextField();
+			}
+		}	
+	}
       }
     });
 
@@ -78,33 +73,55 @@ public class FrameStudents extends JInternalFrame{
     btnDeleteStudent.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        System.out.println("Boton eliminar estudiante al toque rey");
+	if(studentSel.getName().length() > 0){
+		if(crudStudent.eliminarStudent(studentSel.toStringStudent())){
+		  crudStudent.removeRow(filaSelect);
+		  clearTextField();
+		}
+
+	}
       }
     });
 
-    JTable tableStudent = new JTable();
-    tableStudent.setModel(new CRUDStudent(myData.students));
+    JButton btnUpdateStudent  = new JButton("Actualizar");
+    btnUpdateStudent.setBounds(5,30,80,30);
+    btnUpdateStudent.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+	Student updateStudent = new Student(texfieldStudentDNI.getText(),textfieldNameStudent.getText(), textfieldDateStudent.getText(),textfieldCourseStudent.getText());
+	if(studentSel.getName().length() > 0){
+		if(crudStudent.actualizarStudent(studentSel.toStringStudent(), updateStudent.toStringStudent())){
+		  crudStudent.setValueAt(updateStudent.getStudentDNI(), filaSelect, 0);
+		  crudStudent.setValueAt(updateStudent.getName(), filaSelect, 1);
+		  crudStudent.setValueAt(updateStudent.getDate(), filaSelect, 2);
+		  crudStudent.setValueAt(updateStudent.getidCourseTeacher(), filaSelect, 3);
+		  clearTextField();
+		}
+
+	}
+      }
+    });
+
+    tableStudent.setModel(crudStudent);
     tableStudent.addMouseListener(new MouseListener() {
       @Override
       public void mouseClicked(MouseEvent e) {
         int indexRow = tableStudent.getSelectedRow();
+
         String studentDNI = tableStudent.getValueAt(indexRow, 0).toString();
         String namestudent = tableStudent.getValueAt(indexRow, 1).toString();
         String datestudent = tableStudent.getValueAt(indexRow, 2).toString();
-
         String coursestudent =  tableStudent.getValueAt(indexRow, 3).toString();
-        String scorestudent = tableStudent.getValueAt(indexRow, 4).toString();
-        String dniteacherstudent = tableStudent.getValueAt(indexRow, 5).toString();
-        String teacherstudent = tableStudent.getValueAt(indexRow,6).toString();
 
         texfieldStudentDNI.setText(studentDNI);
         textfieldNameStudent.setText(namestudent);
         textfieldDateStudent.setText(datestudent);
-
-        textfieldScoreStudent.setText(String.valueOf(scorestudent));
         textfieldCourseStudent.setText(coursestudent);
-        texfieldDNITeacherOnStudent.setText(dniteacherstudent);
-        textfieldNameTeacherOnStudent.setText(teacherstudent);
+
+	studentSel.setStudentDNI(studentDNI);
+	studentSel.setName(namestudent);
+	studentSel.setDate(datestudent);
+	studentSel.setCourseteacher(coursestudent);
 
       }
 
@@ -144,21 +161,22 @@ public class FrameStudents extends JInternalFrame{
 
     JPanel_student.add(labelCourseStudent);
     JPanel_student.add(textfieldCourseStudent);
-    JPanel_student.add(labelScoreStudent);
-    JPanel_student.add(textfieldScoreStudent);
 
-    JPanel_student.add(labelDNITeacherOnStudent);
-    JPanel_student.add(texfieldDNITeacherOnStudent);
-    JPanel_student.add(labelNameTeacherOnStudent);
-    JPanel_student.add(textfieldNameTeacherOnStudent);
 
     JPanel_student.add(btnAddStudent);
     JPanel_student.add(btnDeleteStudent);
+    JPanel_student.add(btnUpdateStudent);
 
     JPanel_student.setBorder(new EmptyBorder(0,0,40,0));
     this.add(scrollPane_student, BorderLayout.CENTER);
     this.add(JPanel_student, BorderLayout.PAGE_END);
 
   }
- 
+   public void clearTextField(){
+	 texfieldStudentDNI.setText("");
+	 textfieldNameStudent.setText("");
+	 textfieldDateStudent.setText("");
+	 textfieldCourseStudent.setText("");
+  }
+
 }

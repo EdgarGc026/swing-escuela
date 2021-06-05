@@ -22,6 +22,8 @@ class School implements ActionListener {
   FrameTeachers frameTeachers = new FrameTeachers("Maestros", true, true, true, true);
   FrameDirect frameDirect = new FrameDirect("Directores", true, true, true, true);
   FrameAdmin frameAdmin = new FrameAdmin("Administradores", true, true, true, true);
+  FrameCourse frameCourse = new FrameCourse("Cursos", true, true, true, true);
+  FrameCourseTeacher frameCourseTeacher = new FrameCourseTeacher("Cursos Maestros", true, true, true, true);
 
   School(){
     //Creamos el frame principal
@@ -38,36 +40,19 @@ class School implements ActionListener {
     makeMenuTeacher();
     makeMenuDirector();
     makeMenuAdmin();
-    Data myData = new Data();
     JFrame_myFrame.setJMenuBar(JMenuBar_myMenu);
 
     //Creamos un JDesktopPane  para nuestro programa MDI, Multiple Document Interface
     JDesktopPane_myDesktopPane = new JDesktopPane();
     JDesktopPane_myDesktopPane.setBackground(Color.GRAY);
     JFrame_myFrame.setContentPane(JDesktopPane_myDesktopPane);
-
+    // Se agregan internal frames
     JDesktopPane_myDesktopPane.add(frameStudents);
-    /*TODO: Usando el JInternaFrame de los Maestros
-    * Seccion JInternalFrame de los maestros
-    * Estudiantes y sus calificaciones
-    * */
     JDesktopPane_myDesktopPane.add(frameTeachers);
-
-    /*TODO: Estas usando el InternalFrame de los directores
-    * Seccion JIntenalFrame de los directores
-    * Operaciones CRUD a los siguientes:
-    * Profesor y Administrador
-    * */
-       JDesktopPane_myDesktopPane.add(frameDirect);
-
-    //TODO: Estas usando el InternalFrame de Admin, lee la descripcion
-    /*
-     * Seccion de los administradores
-     * Debe tener un crud funcional con
-     * Estudiantes
-     * */
-
+    JDesktopPane_myDesktopPane.add(frameDirect);
     JDesktopPane_myDesktopPane.add(frameAdmin);
+    JDesktopPane_myDesktopPane.add(frameCourse);
+    JDesktopPane_myDesktopPane.add(frameCourseTeacher);
 
     // Mostramos el Frame.
     JFrame_myFrame.setVisible(true);
@@ -94,6 +79,12 @@ class School implements ActionListener {
     if (commandString.equals("Opciones administrador")){
       frameAdmin.setVisible(true);
     }
+   if (commandString.equals("Opciones curso maestro")){
+      frameCourseTeacher.setVisible(true);
+    }
+   if (commandString.equals("Opciones curso")){
+      frameCourse.setVisible(true);
+    }
   }
 
   void makeMenuStudent(){
@@ -108,9 +99,15 @@ class School implements ActionListener {
   void makeMenuTeacher(){
     JMenu JMenu_teachers = new JMenu("Maestros");
     JMenuItem JMenuItem_show = new JMenuItem("Opciones maestro");
+    JMenuItem JMenuItem_curso = new JMenuItem("Opciones curso");
+    JMenuItem JMenucursoTeacher = new JMenuItem("Opciones curso maestro");
     JMenuItem_show.setToolTipText("Opciones profesor");
     JMenu_teachers.add(JMenuItem_show);
+    JMenu_teachers.add(JMenuItem_curso);
+    JMenu_teachers.add(JMenucursoTeacher);
     JMenuItem_show.addActionListener(this);
+    JMenuItem_curso.addActionListener(this);
+    JMenucursoTeacher.addActionListener(this);
     JMenuBar_myMenu.add(JMenu_teachers);
   }
 

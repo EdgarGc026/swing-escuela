@@ -75,6 +75,24 @@ public class FrameAdmin extends JInternalFrame{
       }
     });
 
+    JButton btnUpdateAdmin  = new JButton("Actualizar");
+    btnUpdateAdmin.setBounds(5,30,80,30);
+    btnUpdateAdmin.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+	Admin updateAdmin = new Admin(texfieldIdAdmin.getText(),texfieldNameAdmin.getText(), texfieldJobAdmin.getText());
+	if(adminSel.getName().length() > 0){
+		if(crudAdmin.actualizarAdmin(adminSel.toStringAdmin(), updateAdmin.toStringAdmin())){
+		  crudAdmin.setValueAt(updateAdmin.getId(), filaSelect, 0);
+		  crudAdmin.setValueAt(updateAdmin.getName(), filaSelect, 1);
+		  crudAdmin.setValueAt(updateAdmin.getJob(), filaSelect, 2);
+		  clearTextField();
+		}
+
+	}
+      }
+    });
+
     tableAdmin.setModel(crudAdmin);
     tableAdmin.addMouseListener(new MouseListener() {
       @Override
@@ -122,6 +140,7 @@ public class FrameAdmin extends JInternalFrame{
     JPanel_administrator.add(texfieldJobAdmin);
     JPanel_administrator.add(btnAddStudentOnAdmin);
     JPanel_administrator.add(btnDeleteStudentOnAdmin);
+    JPanel_administrator.add(btnUpdateAdmin);
 
     JScrollPane scrollPane_admin = new JScrollPane(tableAdmin);
     this.add(scrollPane_admin, BorderLayout.CENTER);

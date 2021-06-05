@@ -1,11 +1,16 @@
 package models;
 public class Course {
+  private String idCourse;
   private String name;
   private int score;
 
-  public Course(String name, int score) {
+  public Course(String idCourse, String name, int score) {
+    this.idCourse = idCourse;
     this.name = name;
     this.score = score;
+  }
+  
+  public Course() {
   }
 
   public int getScore() {
@@ -16,8 +21,16 @@ public class Course {
     this.score = score;
   }
 
-  public String getName() {
+  public String getIdCourse() {
     return name;
+  }
+
+  public void setIdCourse(String name) {
+    this.name = name;
+  }
+
+  public String getName() {
+    return idCourse;
   }
 
   public void setName(String name) {
@@ -25,6 +38,6 @@ public class Course {
   }
 
   public String toStringCourse() {
-    return this.name+ "," +this.score;
+    return this.idCourse + "," + this.name+ "," +this.score;
   }
 }

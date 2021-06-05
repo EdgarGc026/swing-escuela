@@ -4,13 +4,16 @@ public class Student {
   private String studentDNI;
   private String name;
   private String date;
-  private CourseTeacher courseteacher;
+  private String idCourseTeacher;
 
-  public Student(String studentDNI, String name, String date, CourseTeacher courseteacher) {
+  public Student(String studentDNI, String name, String date, String idCourseTeacher) {
     this.studentDNI = studentDNI;
     this.name = name;
     this.date = date;
-    this.courseteacher = courseteacher;
+    this.idCourseTeacher = idCourseTeacher;
+  }
+
+  public Student() {
   }
 
   public String getStudentDNI() {
@@ -37,15 +40,15 @@ public class Student {
     this.date = date;
   }
 
-  public CourseTeacher getCourseteacher() {
-    return courseteacher;
+  public String getidCourseTeacher() {
+    return idCourseTeacher;
   }
 
-  public void setCourseteacher(CourseTeacher courseteacher) {
-    this.courseteacher = courseteacher;
+  public void setCourseteacher(String idCourseTeacher) {
+    this.idCourseTeacher = idCourseTeacher;
   }
 
   public String toStringStudent() {
-    return this.studentDNI + ',' + this.name + ',' + this.date + ',' + this.courseteacher;
+    return this.studentDNI + ',' + this.name + ',' + this.date + ',' + this.idCourseTeacher;
   }
 }

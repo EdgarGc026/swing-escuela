@@ -76,6 +76,24 @@ public class FrameDirect extends JInternalFrame{
       }
     });
 
+    JButton btnUpdateDirect  = new JButton("Actualizar");
+    btnUpdateDirect.setBounds(5,30,80,30);
+    btnUpdateDirect.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+	Director updateDirector = new Director(textfieldIdDirector.getText(),textfieldNameDirector.getText(), textfieldJobDirector.getText());
+	if(directorSel.getName().length() > 0){
+		if(crudDirector.actualizarDirector(directorSel.toStringDirector(), updateDirector.toStringDirector())){
+		  crudDirector.setValueAt(updateDirector.getPersonalNum(), filaSelect, 0);
+		  crudDirector.setValueAt(updateDirector.getName(), filaSelect, 1);
+		  crudDirector.setValueAt(updateDirector.getJob(), filaSelect, 2);
+		  clearTextField();
+		}
+
+	}
+      }
+    });
+
     tableDirector.setModel(crudDirector);
     // Evento para seleccionar directores
     tableDirector.addMouseListener(new MouseListener() {
@@ -127,6 +145,7 @@ public class FrameDirect extends JInternalFrame{
     JPanel_director.add(textfieldJobDirector);
     JPanel_director.add(btnAddDirector);
     JPanel_director.add(btnDeleteDirector);
+    JPanel_director.add(btnUpdateDirect);
 
     JScrollPane scrollPane_director = new JScrollPane(tableDirector);
     this.add(scrollPane_director, BorderLayout.CENTER);

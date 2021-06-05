@@ -72,6 +72,24 @@ public class FrameTeachers extends JInternalFrame{
       }
     });
 
+    JButton btnUpdateTeacher  = new JButton("Actualizar");
+    btnUpdateTeacher.setBounds(5,30,80,30);
+    btnUpdateTeacher.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+	Teacher updateTeacher = new Teacher(textFieldDNITeacher.getText(),textFieldNameTeacher.getText()); 
+	if(teacherSel.getName().length() > 0){
+		if(crudTeacher.actualizarTeacher(teacherSel.toStringTeacher(), updateTeacher.toStringTeacher())){
+		  crudTeacher.setValueAt(updateTeacher.getPersonaNumber(), filaSelect, 0);
+		  crudTeacher.setValueAt(updateTeacher.getName(), filaSelect, 1);
+		  clearTextField();
+		}
+
+	}
+      }
+    });
+
+
     tableTeacher.setModel(crudTeacher);
     tableTeacher.addMouseListener(new MouseListener() {
       @Override
@@ -118,6 +136,7 @@ public class FrameTeachers extends JInternalFrame{
     JPanel_teacher.add(textFieldNameTeacher);
     JPanel_teacher.add(btnAddTeacher);
     JPanel_teacher.add(btnDeleteTeacher);
+    JPanel_teacher.add(btnUpdateTeacher);
 
     this.add(scrollPane_teacher, BorderLayout.CENTER);
     this.add(JPanel_teacher, BorderLayout.PAGE_END);
