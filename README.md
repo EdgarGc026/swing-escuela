@@ -54,16 +54,14 @@ Y empiezan de la siguiente forma:
 
 Para esto lo que se hace es obtiene el siguiente String:
 
-	 ```
-		1, Roberto, director ;3, Astolfo, director ;4, Fernando, director
-
-	```
-
+```
+1, Roberto, director ;3, Astolfo, director ;4, Fernando, director
+```
 Se le hace un split utilizando como delimitador el ; y se obtiene la siguiente lista:
 
-	 ```
-		["1, Roberto, director","3, Astolfo, director","4, Fernando, director"]
-	```
+```
+["1, Roberto, director","3, Astolfo, director","4, Fernando, director"]
+```
 
 Despues dentro de un ciclo, utilizando como delimitador la , se hace un split y cada campo se asignar a sus correspondiente campo
 
