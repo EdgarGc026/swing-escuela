@@ -107,6 +107,7 @@ public class FrameStudents extends JInternalFrame{
       @Override
       public void mouseClicked(MouseEvent e) {
         int indexRow = tableStudent.getSelectedRow();
+	filaSelect = tableStudent.getSelectedRow();
 
         String studentDNI = tableStudent.getValueAt(indexRow, 0).toString();
         String namestudent = tableStudent.getValueAt(indexRow, 1).toString();
